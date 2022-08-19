@@ -17,8 +17,6 @@ const workspaceItemDeleteItem = (imageProperty: ImageProperty) => {
 const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean) => {
   imageStore.setImageSelected(imageProperty.id, isSelected);
 }
-
-
 </script>
 
 <template>
