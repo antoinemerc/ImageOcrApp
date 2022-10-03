@@ -22,10 +22,22 @@ const sidebarItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean
   imageStore.setImageSelected(imageProperty.id, isSelected);
 }
 
+const sidebarSendAllImages = (imageProperties: ImageProperty[]) => {
+  const formData = new FormData();
+  imageProperties.forEach(imageProperty => {
+    formData.append(`imagesToAnnotate`, imageProperty.file, imageProperty.file.name)
+  });
+  fetch('http://localhost:3000/gc', {
+    method: 'POST',
+    body: formData,
+  }).then((test) => {
+    console.log(test)
+  });
+}
+
 // No upsert yet, if double are uploaded it's the users fault
 const handleFilesChanged = (files: File[]) => {
   const newImageProperties = files.map((data: File) => {
-    console.log(data)
     return new ImageProperty({ id: Date.now() + Math.random(), file: data, displayName: data.name });
   });
   imageStore.addBulkImage(newImageProperties);
@@ -69,7 +81,7 @@ const handleFilesChanged = (files: File[]) => {
     </div>
     <div class="sidebar-item-container sidebar-bottom">
       <p class="send-hint">Envoyer les images sélectionné à Google cloud vision (1000 images gratuites)</p>
-      <button>Envoyer</button>
+      <button @click="sidebarSendAllImages(imageStore.imageList)">Envoyer</button>
     </div>
   </div>
 </template>

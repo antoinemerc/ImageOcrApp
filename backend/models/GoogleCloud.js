@@ -46,7 +46,7 @@ class GoogleCloud {
   }
 
   // Todo: KO, Finish this method to handle incoming data from frontend
-  async sendAllImagesGoogleVision(imageList) {
+  async getAllImagesAnnotation(imageList) {
     const features = [{ type: 'LABEL_DETECTION' }];
 
     const request = imageList.map(image => {
