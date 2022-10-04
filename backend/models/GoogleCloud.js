@@ -45,35 +45,34 @@ class GoogleCloud {
     return detections;
   }
 
-  // Todo: KO, Finish this method to handle incoming data from frontend
+  /**
+   * Get Text annotation for a list of images
+   * @param {File[]} imageList list of file type variables
+   * @returns {Promise<{ 
+   *    imageInfo: {originalname: string, mimetype: string, size: number},
+   *    annotationOverview: any,
+   *    annotationDetails: any[]
+   * }[]>} 
+   * annotationOverview is the first item of a gc vision result and contains all the text detected separated by \n
+   * annotationDetails contains all groups of characters detected, with their coordinate
+   */
   async getAllImagesAnnotation(imageList) {
-    const features = [{ type: 'LABEL_DETECTION' }];
-
-    const request = imageList.map(image => {
+    const requests = imageList.map(image => {
       return {
         image: {
-          source: {
-            imageUri: inputImageUri,
-          },
-        },
-        features: features,
+          content: image.buffer,
+        }
       };
     });
-  }
-
-  // Todo: KO, Finish this method to handle uploaded file
-  async getTextAnnotationFromImageUri(imageUri) {
-    const features = [{ type: 'LABEL_DETECTION' }];
-
-    const request = {
-      image: {
-        source: {
-          imageUri: imageUri,
-        },
-      },
-      features: features,
-    };
-    await this.getTextAnnotationFromRequest(request);
+    const annotations = await Promise.all(requests.map(request => this.getTextAnnotationFromRequest(request)))
+    return annotations.map((annotation, index) => {
+      const { originalname, mimetype, size } = imageList[index];
+      return {
+        imageInfo: { originalname, mimetype, size },
+        annotationOverview: annotation[0],
+        annotationDetails: annotation.slice(1, annotation.length)
+      };
+    });
   }
 
   /**

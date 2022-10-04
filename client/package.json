@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.1.0",
+    "file-saver": "^2.0.5",
     "vue": "^3.2.37",
     "vue-file-selector": "^2.0.2"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@vitejs/plugin-vue": "^3.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",

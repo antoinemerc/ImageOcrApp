@@ -10,28 +10,23 @@ router.get('', async (req, res) => {
   const availableRoutes = {
     'title': 'Available routes',
     'routes': [
-      '/test-init',
-      '/test-sample',
+      'Get -  /test-init',
+      'Get -  /test-sample',
+      'Post - /annotate-images',
     ]
   };
   res.send(availableRoutes)
 });
 
+// Middleware fills req.file as { propertyName: [file1, file2...]} with propertyName the value of name in upload.field
+// rest of data is in req.body
 const cpUpload = upload.fields([{ name: 'imagesToAnnotate', maxCount: 1000 }])
-router.post('', cpUpload, async (req, res) => {
-  console.log(req.files)
-  console.log(req.body)
-  req.on('readable', function () {
-    console.log(req.read());
+router.post('/annotate-images', cpUpload, async (req, res) => {
+  const annotationList = await gcInstance.getAllImagesAnnotation(req.files.imagesToAnnotate).catch((error) => {
+    console.log('ERROR - problem while processing', error);
+    res.send(error);
   });
-  const availableRoutes = {
-    'title': 'Available Post',
-    'routes': [
-      '/test-init',
-      '/test-sample',
-    ]
-  };
-  res.send(availableRoutes)
+  res.send(annotationList);
 });
 
 
@@ -42,7 +37,7 @@ router.get('/test-init', async (req, res) => {
   }).catch((error) => {
     console.log('ERROR - initialize didnt work', error);
     res.send(error);
-  })
+  });
 });
 
 router.get('/test-sample', async (req, res) => {

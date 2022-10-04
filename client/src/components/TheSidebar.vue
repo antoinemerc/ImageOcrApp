@@ -4,15 +4,12 @@ import { reactive } from 'vue'
 import { ImageProperty } from '../models/ImageProperty';
 import { FsValidationResult } from 'vue-file-selector/dist';
 import { imageStore } from '../services/store';
+import { saveAs } from 'file-saver';
 
 interface ReactiveState {
 }
 const state: ReactiveState = reactive({
 });
-
-const handleFilesValidated = (result: FsValidationResult, files: File[]) => {
-  console.log('Validation result: ' + result);
-}
 
 const sidebarItemDeleteItem = (imageProperty: ImageProperty) => {
   imageStore.deleteImageById(imageProperty.id);
@@ -22,17 +19,23 @@ const sidebarItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean
   imageStore.setImageSelected(imageProperty.id, isSelected);
 }
 
-const sidebarSendAllImages = (imageProperties: ImageProperty[]) => {
+const sidebarSendAllImages = async () => {
+  const selectedImages = imageStore.imageList.filter(image => image.selected);
   const formData = new FormData();
-  imageProperties.forEach(imageProperty => {
-    formData.append(`imagesToAnnotate`, imageProperty.file, imageProperty.file.name)
+  selectedImages.forEach(selectedImage => {
+    formData.append(`imagesToAnnotate`, selectedImage.file, selectedImage.file.name)
   });
-  fetch('http://localhost:3000/gc', {
+
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_ENDPOINT}/gc/annotate-images`, {
     method: 'POST',
     body: formData,
-  }).then((test) => {
-    console.log(test)
+  })
+  const annotations = await response.json();
+  const fileName = `pictureAnnotations-${new Date().toISOString()}.json`;
+  const fileToSave = new Blob([JSON.stringify(annotations)], {
+    type: 'application/json'
   });
+  saveAs(fileToSave, fileName);
 }
 
 // No upsert yet, if double are uploaded it's the users fault
@@ -53,7 +56,6 @@ const handleFilesChanged = (files: File[]) => {
     <div class="sidebar-item-container">
       <FileSelector accept-extensions=".jpg,.svg,.png"
                     :multiple="true"
-                    @validated="handleFilesValidated"
                     @changed="handleFilesChanged">
         Importer des images
       </FileSelector>
@@ -81,7 +83,7 @@ const handleFilesChanged = (files: File[]) => {
     </div>
     <div class="sidebar-item-container sidebar-bottom">
       <p class="send-hint">Envoyer les images sélectionné à Google cloud vision (1000 images gratuites)</p>
-      <button @click="sidebarSendAllImages(imageStore.imageList)">Envoyer</button>
+      <button @click="sidebarSendAllImages()">Envoyer</button>
     </div>
   </div>
 </template>
