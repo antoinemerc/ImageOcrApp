@@ -1,10 +1,8 @@
 const express = require('express')
 const cors = require('cors')
-var multer = require('multer');
 
 const app = express();
 app.use(cors());
-const upload = multer();
 
 const port = 3000;
 process.env.PWD = process.cwd();

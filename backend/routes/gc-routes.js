@@ -20,8 +20,8 @@ router.get('', async (req, res) => {
 
 // Middleware fills req.file as { propertyName: [file1, file2...]} with propertyName the value of name in upload.field
 // rest of data is in req.body
-const cpUpload = upload.fields([{ name: 'imagesToAnnotate', maxCount: 1000 }])
-router.post('/annotate-images', cpUpload, async (req, res) => {
+const mdFileHandler = upload.fields([{ name: 'imagesToAnnotate', maxCount: 1000 }])
+router.post('/annotate-images', mdFileHandler, async (req, res) => {
   const annotationList = await gcInstance.getAllImagesAnnotation(req.files.imagesToAnnotate).catch((error) => {
     console.log('ERROR - problem while processing', error);
     res.send(error);
