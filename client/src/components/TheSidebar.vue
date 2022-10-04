@@ -2,7 +2,6 @@
 
 import { reactive } from 'vue'
 import { ImageProperty } from '../models/ImageProperty';
-import { FsValidationResult } from 'vue-file-selector/dist';
 import { imageStore } from '../services/store';
 import { saveAs } from 'file-saver';
 
@@ -57,7 +56,7 @@ const handleFilesChanged = (files: File[]) => {
       <FileSelector accept-extensions=".jpg,.svg,.png"
                     :multiple="true"
                     @changed="handleFilesChanged">
-        Importer des images
+        Import Images
       </FileSelector>
     </div>
     <div class="sidebar-item-container">
@@ -82,8 +81,8 @@ const handleFilesChanged = (files: File[]) => {
       </ul>
     </div>
     <div class="sidebar-item-container sidebar-bottom">
-      <p class="send-hint">Envoyer les images sélectionné à Google cloud vision (1000 images gratuites)</p>
-      <button @click="sidebarSendAllImages()">Envoyer</button>
+      <p class="send-hint">Send selected pictures to Google Cloud Vision (1000 free images per month)</p>
+      <button @click="sidebarSendAllImages()">Send</button>
     </div>
   </div>
 </template>
