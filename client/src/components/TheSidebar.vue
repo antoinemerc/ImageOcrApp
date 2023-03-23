@@ -6,24 +6,38 @@ import { imageStore } from '../services/store';
 import { saveAs } from 'file-saver';
 
 interface ReactiveState {
+  
 }
 const state: ReactiveState = reactive({
 });
 
 const sidebarItemDeleteItem = (imageProperty: ImageProperty) => {
   imageStore.deleteImageById(imageProperty.id);
+  imageStore.resetActiveError();
 }
 
 const sidebarItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean) => {
   imageStore.setImageSelected(imageProperty.id, isSelected);
+  imageStore.resetActiveError();
 }
 
 const sidebarSendAllImages = async () => {
   const selectedImages = imageStore.imageList.filter(image => image.selected);
+
+  if (selectedImages.length === 0) {
+    imageStore.setMinimumImageError()
+  }
+
+  if (imageStore.activeError.length !== 0) {
+    alert('The images cannot be sent in this state, please review error summary');
+    return;
+  }
+
   const formData = new FormData();
   selectedImages.forEach(selectedImage => {
     formData.append(`imagesToAnnotate`, selectedImage.file, selectedImage.file.name)
   });
+
 
   const response = await fetch(`${import.meta.env.VITE_BACKEND_ENDPOINT}/gc/annotate-images`, {
     method: 'POST',
@@ -43,6 +57,7 @@ const handleFilesChanged = (files: File[]) => {
     return new ImageProperty({ id: Date.now() + Math.random(), file: data, displayName: data.name });
   });
   imageStore.addBulkImage(newImageProperties);
+  imageStore.resetActiveError();
 }
 
 </script>
@@ -82,6 +97,18 @@ const handleFilesChanged = (files: File[]) => {
     </div>
     <div class="sidebar-item-container sidebar-bottom">
       <p class="send-hint">Send selected pictures to Google Cloud Vision (1000 free images per month)</p>
+      <div v-if="imageStore.activeError.length !== 0"
+           class="error-summary-container">
+        <span class="error-summary-title">Error Summary</span>
+        <ul class="error-summary-list">
+          <li v-for='(activeError, index) in imageStore.activeError'
+              :key='activeError.id'>
+            <span class="error-item-title">{{ activeError.title }}:</span>
+            <span class="error-item-message"> {{ activeError.message }}</span>
+          </li>
+        </ul>
+
+      </div>
       <button @click="sidebarSendAllImages()">Send</button>
     </div>
   </div>
@@ -99,7 +126,7 @@ const handleFilesChanged = (files: File[]) => {
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-color: rgba(var(--main-accent-tri-0), 1);
+  background-color: rgba(var(--main-accent-color), 1);
 }
 
 .sidebar-item-container {
@@ -146,5 +173,25 @@ const handleFilesChanged = (files: File[]) => {
 
 .send-hint {
   padding: 0px 10px;
+}
+
+.error-summary-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  color: var(--danger-color);
+}
+
+.error-summary-title {
+  font-weight: bold;
+}
+.error-summary-list {
+  padding: 0;
+  list-style-type: none;
+
+}
+.error-item-title {
+  font-weight: bold;
+  padding-right: 5px;
 }
 </style>

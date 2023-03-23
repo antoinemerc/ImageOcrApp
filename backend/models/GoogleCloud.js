@@ -8,7 +8,7 @@ class GoogleCloud {
   imageAnnotatorClient;
 
   constructor() {
-    const keyFilenamePath = `${process.env.PWD}\\ocrimageprocess-keyfilename.json`;
+    const keyFilenamePath = `${process.env.PWD}/ocrimageprocess-keyfilename.json`;
     try {
       fs.access(keyFilenamePath, fs.F_OK, (err) => {
         if (err) {
@@ -57,6 +57,12 @@ class GoogleCloud {
    * annotationDetails contains all groups of characters detected, with their coordinate
    */
   async getAllImagesAnnotation(imageList) {
+    
+    console.log(`Received ${imageList?.length} images, annoting`);
+    
+    if (imageList === undefined || imageList === null)
+      return [];
+    
     const requests = imageList.map(image => {
       return {
         image: {

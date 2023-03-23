@@ -74,7 +74,7 @@ const imageSource = computedAsync<string>(
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: rgb(var(--main-accent-tri-0));
+  background-color: rgb(var(--main-accent-color));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -114,7 +114,7 @@ const imageSource = computedAsync<string>(
 
 .item-container.item-selected {
   transition: box-shadow 0.1s ease-in-out;
-  box-shadow: 0 0px 5px 2px rgb(var(--main-highlight-tri-0));
+  box-shadow: 0 0px 5px 2px rgb(0, 157, 255);
 }
 
 .button-container {
@@ -125,7 +125,7 @@ const imageSource = computedAsync<string>(
   z-index: 10;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  background-color: rgb(var(--main-accent-tri-0));
+  background-color: rgb(52, 52, 52);
   display: flex;
   flex-direction: column;
   align-items: center;

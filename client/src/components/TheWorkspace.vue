@@ -12,10 +12,12 @@ const state: ReactiveState = reactive({
 
 const workspaceItemDeleteItem = (imageProperty: ImageProperty) => {
   imageStore.deleteImageById(imageProperty.id);
+  imageStore.resetActiveError();
 }
 
 const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean) => {
   imageStore.setImageSelected(imageProperty.id, isSelected);
+  imageStore.resetActiveError();
 }
 </script>
 
@@ -32,7 +34,6 @@ const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boole
 </template>
 
 <style scoped>
-@import '../assets/styles/variables.css';
 
 .workspace-container {
   display: grid;
