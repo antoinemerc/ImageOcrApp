@@ -2,7 +2,7 @@
 
 import { reactive } from 'vue'
 import { ImageProperty } from '../models/ImageProperty';
-import { imageStore } from '../services/store';
+import { imageStore, errorStore } from '../services/stores';
 import { saveAs } from 'file-saver';
 
 interface ReactiveState {
@@ -13,22 +13,22 @@ const state: ReactiveState = reactive({
 
 const sidebarItemDeleteItem = (imageProperty: ImageProperty) => {
   imageStore.deleteImageById(imageProperty.id);
-  imageStore.resetActiveError();
+  errorStore.resetActiveError();
 }
 
 const sidebarItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean) => {
   imageStore.setImageSelected(imageProperty.id, isSelected);
-  imageStore.resetActiveError();
+  errorStore.resetActiveError();
 }
 
 const sidebarSendAllImages = async () => {
   const selectedImages = imageStore.imageList.filter(image => image.selected);
 
   if (selectedImages.length === 0) {
-    imageStore.setMinimumImageError()
+    errorStore.setMinimumImageError()
   }
 
-  if (imageStore.activeError.length !== 0) {
+  if (errorStore.activeError.length !== 0) {
     alert('The images cannot be sent in this state, please review error summary');
     return;
   }
@@ -57,7 +57,7 @@ const handleFilesChanged = (files: File[]) => {
     return new ImageProperty({ id: Date.now() + Math.random(), file: data, displayName: data.name });
   });
   imageStore.addBulkImage(newImageProperties);
-  imageStore.resetActiveError();
+  errorStore.resetActiveError();
 }
 
 </script>
@@ -97,11 +97,11 @@ const handleFilesChanged = (files: File[]) => {
     </div>
     <div class="sidebar-item-container sidebar-bottom">
       <p class="send-hint">Send selected pictures to Google Cloud Vision (1000 free images per month)</p>
-      <div v-if="imageStore.activeError.length !== 0"
+      <div v-if="errorStore.activeError.length !== 0"
            class="error-summary-container">
         <span class="error-summary-title">Error Summary</span>
         <ul class="error-summary-list">
-          <li v-for='(activeError, index) in imageStore.activeError'
+          <li v-for='(activeError, index) in errorStore.activeError'
               :key='activeError.id'>
             <span class="error-item-title">{{ activeError.title }}:</span>
             <span class="error-item-message"> {{ activeError.message }}</span>

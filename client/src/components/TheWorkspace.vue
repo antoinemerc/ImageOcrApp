@@ -2,7 +2,7 @@
 
 import { reactive } from 'vue'
 import WorkspaceItemImage from './WorkspaceItemImage.vue';
-import { imageStore } from '../services/store';
+import { imageStore, errorStore } from '../services/stores';
 import { ImageProperty } from '../models/ImageProperty';
 
 interface ReactiveState {
@@ -12,12 +12,12 @@ const state: ReactiveState = reactive({
 
 const workspaceItemDeleteItem = (imageProperty: ImageProperty) => {
   imageStore.deleteImageById(imageProperty.id);
-  imageStore.resetActiveError();
+  errorStore.resetActiveError();
 }
 
 const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean) => {
   imageStore.setImageSelected(imageProperty.id, isSelected);
-  imageStore.resetActiveError();
+  errorStore.resetActiveError();
 }
 </script>
 

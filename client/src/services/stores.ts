@@ -4,23 +4,16 @@ import { ImageProperty } from '../models/ImageProperty';
 
 export interface ImageStore {
   imageList: ImageProperty[];
-  
-
   addBulkImage(imagePropertyList: ImageProperty[]): void;
   addImage(imageProperty: ImageProperty): number;
   deleteImageById(id: number): void;
   setImageSelected(id: number, selectedStatus: boolean): void;
   setImageProcessed(id: number, processedStatus: boolean): void;
   setImageSelectedAreas(id: number, selectedAreas: { cooTL: CanvasCoordinate, cooBR: CanvasCoordinate }[]): void;
-  // todo: move to separate ui-state store? dont like mixing image logic with ui logic
-  activeError: { id: number, title: string, message: string }[];
-  setMinimumImageError(): void;
-  resetActiveError(): void;
 }
 
 export const imageStore: ImageStore = reactive({
   imageList: [],
-  activeError: [],
   addBulkImage(imagePropertyList: ImageProperty[]): number {
     return this.imageList.push(...imagePropertyList);
   },
@@ -42,9 +35,24 @@ export const imageStore: ImageStore = reactive({
   deleteImageById(id: number): void {
     const imageIndex = findImageIndexByIdInImageList(this.imageList, id);
     this.imageList.splice(imageIndex, 1);
-  },
-  resetActiveError(): void { 
-    this.activeError = []; 
+  }
+} as ImageStore);
+
+function findImageIndexByIdInImageList(imageList: ImageProperty[], id: number): number {
+  return imageList.findIndex((imageProperty: ImageProperty) => imageProperty.id === id);
+}
+
+// todo: move to separate ui-state store? dont like mixing image logic with ui logic
+export interface ErrorStore { 
+  activeError: { id: number, title: string, message: string }[];
+  resetActiveError(): void;
+  setMinimumImageError(): void;
+}
+
+export const errorStore: ErrorStore = reactive({
+  activeError: [],
+  resetActiveError(): void {
+    this.activeError = [];
   },
   setMinimumImageError(): void {
     this.activeError.push({
@@ -53,9 +61,30 @@ export const imageStore: ImageStore = reactive({
       message: 'At least one image must be selected to be annoted'
     });
   }
+} as ErrorStore);
 
-} as ImageStore)
-
-function findImageIndexByIdInImageList(imageList: ImageProperty[], id: number): number {
-  return imageList.findIndex((imageProperty: ImageProperty) => imageProperty.id === id);
+export interface WorkspaceStepStore { 
+  activeStep: number;
+  setStepById(stepId: number): void;
+  goToNextStep(): void;
+  goToPreviousStep(): void;
 }
+
+export const workspaceStepStore: WorkspaceStepStore = reactive({
+  activeStep: 0,
+  setStepById(id: number): void {
+    this.activeStep = id;
+  },
+  goToNextStep(id: number): void {
+    if (this.activeStep >= 1)
+      return;
+    this.activeStep += 1;
+  },
+  goToPreviousStep(id: number): void {
+    if (this.activeStep <= 0)
+      return;
+    this.activeStep -= 1;
+  },
+} as WorkspaceStepStore);
+
+
