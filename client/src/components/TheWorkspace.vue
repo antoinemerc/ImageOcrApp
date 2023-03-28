@@ -2,8 +2,11 @@
 
 import { reactive } from 'vue'
 import WorkspaceItemImage from './WorkspaceItemImage.vue';
-import { imageStore, errorStore } from '../services/stores';
+import TheWorkspaceSteps from './TheWorkspaceSteps.vue';
+import { imageStore, errorStore, workspaceStepStore } from '../services/stores';
 import { ImageProperty } from '../models/ImageProperty';
+import { ValidSteps } from '../services/steps.skeleton';
+import WorkspaceImageAnnotation from './WorkspaceImageAnnotation.vue';
 
 interface ReactiveState {
 }
@@ -19,27 +22,43 @@ const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boole
   imageStore.setImageSelected(imageProperty.id, isSelected);
   errorStore.resetActiveError();
 }
+const workspaceStepStepSelected = (stepId: number) => {
+  workspaceStepStore.setStepById(stepId)
+}
 </script>
 
 <template>
   <div class="workspace-container">
-    <WorkspaceItemImage v-for='(imageProperty, index) in imageStore.imageList'
-                        :key='imageProperty.id'
-                        :image-property="imageProperty"
-                        :image-index="index"
-                        @delete-item="workspaceItemDeleteItem(imageProperty)"
-                        @select-item="workspaceItemSelectItem(imageProperty, $event)">
-    </WorkspaceItemImage>
+      <TheWorkspaceSteps :active-step-id="workspaceStepStore.activeStep"
+                          @step-selected="workspaceStepStepSelected($event)">
+        </TheWorkspaceSteps>
+      <div class="item-image-container" v-show="workspaceStepStore.activeStep === ValidSteps.IMAGE_SELECTION_STEP">
+        <WorkspaceItemImage v-for='(imageProperty, index) in imageStore.imageList'
+                            :key='imageProperty.id'
+                            :image-property="imageProperty"
+                            :image-index="index"
+                            @delete-item="workspaceItemDeleteItem(imageProperty)"
+                            @select-item="workspaceItemSelectItem(imageProperty, $event)">
+        </WorkspaceItemImage>
+      </div>
+      <div class="" v-show="workspaceStepStore.activeStep === ValidSteps.TEXT_ANNOTATION_STEP">
+          <WorkspaceImageAnnotation :displayed-id="0">
+          </WorkspaceImageAnnotation>
+        </div>
+      
   </div>
 </template>
 
 <style scoped>
+.item-image-container {
+  display: grid;
+  gap: 5px;
+  padding: 5px;
+  grid-template-columns: repeat(auto-fill, 300px);
+  overflow: auto;
+}
 
 .workspace-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
-  gap: 5px;
-  padding: 70px 5px 5px;
   --xy: 45% 90%;
   --b: 90deg;
   --a: 90deg;
@@ -49,6 +68,5 @@ const workspaceItemSelectItem = (imageProperty: ImageProperty, isSelected: boole
       #ececec 0% calc(180deg + var(--a)),
       #c7c7c7 0%);
   background-size: 30px 30px;
-  overflow: auto;
 }
 </style>

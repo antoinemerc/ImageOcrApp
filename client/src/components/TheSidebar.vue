@@ -2,13 +2,14 @@
 
 import { reactive } from 'vue'
 import { ImageProperty } from '../models/ImageProperty';
-import { imageStore, errorStore } from '../services/stores';
+import { imageStore, errorStore, ErrorTypes, workspaceStepStore } from '../services/stores';
 import { saveAs } from 'file-saver';
 
 interface ReactiveState {
-  
+  directDownload: boolean;
 }
 const state: ReactiveState = reactive({
+  directDownload: false,
 });
 
 const sidebarItemDeleteItem = (imageProperty: ImageProperty) => {
@@ -24,10 +25,9 @@ const sidebarItemSelectItem = (imageProperty: ImageProperty, isSelected: boolean
 const sidebarSendAllImages = async () => {
   const selectedImages = imageStore.imageList.filter(image => image.selected);
 
-  if (selectedImages.length === 0) {
-    errorStore.setMinimumImageError()
-  }
-
+  if (selectedImages.length === 0 && !errorStore.activeError.some(error => error.id === ErrorTypes.MINIMUM_IMAGE_ERROR))
+    errorStore.setMinimumImageError();
+  
   if (errorStore.activeError.length !== 0) {
     alert('The images cannot be sent in this state, please review error summary');
     return;
@@ -48,7 +48,12 @@ const sidebarSendAllImages = async () => {
   const fileToSave = new Blob([JSON.stringify(annotations)], {
     type: 'application/json'
   });
-  saveAs(fileToSave, fileName);
+
+  if (state.directDownload === true) {
+    saveAs(fileToSave, fileName);
+  } else { 
+    workspaceStepStore.goToNextStep();
+  }
 }
 
 // No upsert yet, if double are uploaded it's the users fault
@@ -96,20 +101,30 @@ const handleFilesChanged = (files: File[]) => {
       </ul>
     </div>
     <div class="sidebar-item-container sidebar-bottom">
-      <p class="send-hint">Send selected pictures to Google Cloud Vision (1000 free images per month)</p>
-      <div v-if="errorStore.activeError.length !== 0"
-           class="error-summary-container">
-        <span class="error-summary-title">Error Summary</span>
-        <ul class="error-summary-list">
-          <li v-for='(activeError, index) in errorStore.activeError'
-              :key='activeError.id'>
-            <span class="error-item-title">{{ activeError.title }}:</span>
-            <span class="error-item-message"> {{ activeError.message }}</span>
-          </li>
-        </ul>
-
+      <div class="sidebar-bottom-information">
+        <div class="send-hint">Send selected pictures to Google Vision</div>
+        <div>
+          <input type="checkbox"
+                  v-model="state.directDownload" 
+                  class="direct-download-checkbox"/>
+          <span>Direct raw google vision data download</span>
+        </div>
+        <div v-if="errorStore.activeError.length !== 0"
+             class="error-summary-container">
+          <span class="error-summary-title">Error Summary</span>
+          <ul class="error-summary-list">
+            <li v-for='(activeError, index) in errorStore.activeError'
+                :key='activeError.id'>
+              <span class="error-item-title">{{ activeError.title }}:</span>
+              <span class="error-item-message"> {{ activeError.message }}</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <button @click="sidebarSendAllImages()">Send</button>
+        </div>
       </div>
-      <button @click="sidebarSendAllImages()">Send</button>
+      
     </div>
   </div>
 </template>
@@ -193,5 +208,16 @@ const handleFilesChanged = (files: File[]) => {
 .error-item-title {
   font-weight: bold;
   padding-right: 5px;
+}
+.sidebar-bottom-information {
+  width: 100%;
+}
+
+.sidebar-bottom-information > div {
+ padding-left: 10px;
+ padding-bottom: 5px;
+}
+.direct-download-checkbox {
+  margin-right: 10px;
 }
 </style>

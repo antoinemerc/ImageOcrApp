@@ -42,9 +42,19 @@ function findImageIndexByIdInImageList(imageList: ImageProperty[], id: number): 
   return imageList.findIndex((imageProperty: ImageProperty) => imageProperty.id === id);
 }
 
+export interface ErrorStructure { 
+  id: number,
+  title: string,
+  message: string
+}
+
+export enum ErrorTypes { 
+  MINIMUM_IMAGE_ERROR = 0,
+}
+
 // todo: move to separate ui-state store? dont like mixing image logic with ui logic
 export interface ErrorStore { 
-  activeError: { id: number, title: string, message: string }[];
+  activeError: ErrorStructure[];
   resetActiveError(): void;
   setMinimumImageError(): void;
 }
@@ -56,7 +66,7 @@ export const errorStore: ErrorStore = reactive({
   },
   setMinimumImageError(): void {
     this.activeError.push({
-      id: 0,
+      id: ErrorTypes.MINIMUM_IMAGE_ERROR,
       title: 'Minimum image required',
       message: 'At least one image must be selected to be annoted'
     });
