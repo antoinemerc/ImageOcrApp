@@ -2,6 +2,7 @@
 
 import { reactive } from 'vue'
 import { ImageProperty } from '../models/ImageProperty';
+import { HttpRequest } from '../services/http-request';
 import { imageStore, errorStore, ErrorTypes, workspaceStepStore } from '../services/stores';
 import { saveAs } from 'file-saver';
 
@@ -34,26 +35,30 @@ const sidebarSendAllImages = async () => {
   }
 
   const formData = new FormData();
+
   selectedImages.forEach(selectedImage => {
     formData.append(`imagesToAnnotate`, selectedImage.file, selectedImage.file.name)
   });
 
+  const httpClient = new HttpRequest();
+  const response = await httpClient.post('gc/annotate-images', { body: formData })
+  
+  if (response.ok) {
+    const annotations = await response.json();
+    const fileName = `pictureAnnotations-${new Date().toISOString()}.json`;
+    const fileToSave = new Blob([JSON.stringify(annotations)], {
+      type: 'application/json'
+    });
 
-  const response = await fetch(`${import.meta.env.VITE_BACKEND_ENDPOINT}/gc/annotate-images`, {
-    method: 'POST',
-    body: formData,
-  })
-  const annotations = await response.json();
-  const fileName = `pictureAnnotations-${new Date().toISOString()}.json`;
-  const fileToSave = new Blob([JSON.stringify(annotations)], {
-    type: 'application/json'
-  });
-
-  if (state.directDownload === true) {
-    saveAs(fileToSave, fileName);
-  } else { 
-    workspaceStepStore.goToNextStep();
-  }
+    if (state.directDownload === true) {
+      saveAs(fileToSave, fileName);
+    } else {
+      workspaceStepStore.goToNextStep();
+    }
+  } else {
+    console.log("error")
+    // add a notification error
+  }  
 }
 
 // No upsert yet, if double are uploaded it's the users fault

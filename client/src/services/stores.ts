@@ -9,6 +9,7 @@ export interface ImageStore {
   deleteImageById(id: number): void;
   setImageSelected(id: number, selectedStatus: boolean): void;
   setImageProcessed(id: number, processedStatus: boolean): void;
+  setImageProcessedBulk(ids: number[], processedStatus: boolean): void;
   setImageSelectedAreas(id: number, selectedAreas: { cooTL: CanvasCoordinate, cooBR: CanvasCoordinate }[]): void;
 }
 
@@ -27,6 +28,13 @@ export const imageStore: ImageStore = reactive({
   setImageProcessed(id: number, processedStatus: boolean): void {
     const imageIndex = findImageIndexByIdInImageList(this.imageList, id);
     this.imageList[imageIndex].processed = processedStatus;
+  },
+  setImageProcessedBulk(ids: number[], processedStatus: boolean): void {
+    const processedId: Map<number, any>  = new Map(ids.map((id) => [id, null]));
+    this.imageList.forEach((image, index) => {
+      if (processedId.has(image.id))
+        this.imageList[index].processed = processedStatus;
+    });
   },
   setImageSelectedAreas(id: number, selectedAreas: { cooTL: CanvasCoordinate, cooBR: CanvasCoordinate }[]): void {
     const imageIndex = findImageIndexByIdInImageList(this.imageList, id);

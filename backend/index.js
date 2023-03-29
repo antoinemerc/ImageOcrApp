@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
 const gcRoutes = require('./routes/gc-routes');
 app.use('/gc', gcRoutes);
 
+const kmeansRoutes = require('./routes/kmeans-routes');
+app.use('/kmeans', kmeansRoutes);
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
