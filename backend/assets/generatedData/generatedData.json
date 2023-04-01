@@ -1,0 +1,162 @@
+[
+  {
+    "naiveK": 12,
+    "centers": [
+      {
+        "description": "O",
+        "x": 17,
+        "y": -231
+      },
+      {
+        "description": "CLENCH",
+        "x": 257,
+        "y": -408
+      },
+      {
+        "description": "IF",
+        "x": 134,
+        "y": -531
+      },
+      {
+        "description": "YOU",
+        "x": 161,
+        "y": -531
+      },
+      {
+        "description": "FEEL",
+        "x": 224,
+        "y": -531
+      },
+      {
+        "description": "UNCOMFORTABLE",
+        "x": 91,
+        "y": -566
+      },
+      {
+        "description": "COMING",
+        "x": 89,
+        "y": -600
+      },
+      {
+        "description": "UP",
+        "x": 208,
+        "y": -600
+      },
+      {
+        "description": "WITH",
+        "x": 246,
+        "y": -600
+      },
+      {
+        "description": "SOMETHING",
+        "x": 46,
+        "y": -636
+      },
+      {
+        "description": "TO",
+        "x": 211,
+        "y": -637
+      },
+      {
+        "description": "DISCUSS",
+        "x": 253,
+        "y": -637
+      },
+      {
+        "description": ",",
+        "x": 362,
+        "y": -638
+      },
+      {
+        "description": "HOW",
+        "x": 75,
+        "y": -671
+      },
+      {
+        "description": "ABOUT",
+        "x": 148,
+        "y": -671
+      },
+      {
+        "description": "DOING",
+        "x": 244,
+        "y": -671
+      },
+      {
+        "description": "SOMETHING",
+        "x": 96,
+        "y": -706
+      },
+      {
+        "description": "LIKE",
+        "x": 263,
+        "y": -706
+      },
+      {
+        "description": "\"",
+        "x": 120,
+        "y": -741
+      },
+      {
+        "description": "WOULD",
+        "x": 130,
+        "y": -741
+      },
+      {
+        "description": "YOU",
+        "x": 237,
+        "y": -741
+      },
+      {
+        "description": "RATHER",
+        "x": 138,
+        "y": -776
+      },
+      {
+        "description": "\"",
+        "x": 239,
+        "y": -775
+      },
+      {
+        "description": "?!",
+        "x": 252,
+        "y": -775
+      },
+      {
+        "description": "DON'T",
+        "x": 370,
+        "y": -864
+      },
+      {
+        "description": "WORRY",
+        "x": 458,
+        "y": -864
+      },
+      {
+        "description": ",",
+        "x": 555,
+        "y": -864
+      },
+      {
+        "description": "WE'LL",
+        "x": 350,
+        "y": -896
+      },
+      {
+        "description": "HELP",
+        "x": 432,
+        "y": -896
+      },
+      {
+        "description": "YOU",
+        "x": 502,
+        "y": -896
+      },
+      {
+        "description": "!!",
+        "x": 561,
+        "y": -896
+      }
+    ]
+  }
+]

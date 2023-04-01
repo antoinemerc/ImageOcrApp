@@ -26,4 +26,10 @@ router.get('/test-sample-data', async (req, res) => {
   res.send(await kmeans.getDataFromSampleJson());
 });
 
+router.get('/generate-sample-data-file', async (req, res) => {
+  const jsonData = await kmeans.getDataFromSampleJson();
+  kmeans.writeJsonToFile(jsonData, 'generatedData');
+  res.send(jsonData);
+});
+
 module.exports = router;

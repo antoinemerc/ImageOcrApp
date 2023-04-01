@@ -1,12 +1,48 @@
 const fs = require('fs');
-const { readFileSync } = require('fs');
-Plotly
+const { spawn } = require('child_process');
+
 class AnnotationStruct {
   naiveK;//: number;  split annotationOverview.description (extracted string separated by /n)
   realK;//: number the human given real K
-  data;//[ {x: number,y: number}, ...] List of all quadrilateral form center
+  centers;// Centers[]List of all quadrilateral form center
 }
 
+class Centers { 
+  x;
+  y;
+  description;
+}
+
+/**
+ * 
+ * The plan is to feed a google vision result to this class, it will identify which point belong to which cluster
+ * Once points inside cluster are figured out, their corresponding description are put together to get sentences,
+ * This result is returned to the front end, ready fro translation or excel export
+ * 
+ * Input:
+ * 
+ * JsonFile {
+ *  naiveK: number the number of points found, naively each can be a cluster
+ *  realK: number the user given "true number" of clusters to be found
+ *  centers: {
+ *    x: number
+ *    y: number
+ *    description: string
+ *  }[]
+ * }
+ * 
+ * Python script that takes this input and run it through kmeans clustering transforms this data into output Json structure
+ * 
+ * Wanted Output:
+ * 
+ *  ReturnStructure {
+ *     nbrCluster: number, the number of cluster
+ *     clusters: {
+ *        description: string;
+ *        points: points as received in google vision part of the cluster
+ *     }[]
+ *  }
+ */
 
 class KMeansClustering { 
 
@@ -22,7 +58,12 @@ class KMeansClustering {
     const data = imagesAnnotation.map(imageAnnotation => {
       const naiveK = this.getNaiveK(imageAnnotation)
       const centers = imageAnnotation.annotationDetails.map((details) => {
-        return this.getQuadrilateralCenter(details.boundingPoly.vertices);
+        const { x, y } = this.getQuadrilateralCenter(details.boundingPoly.vertices);
+        return {
+          description: details.description,
+          x,
+          y
+        }
       });
       return {
         naiveK,
@@ -32,6 +73,13 @@ class KMeansClustering {
     return data;
   }
 
+  writeJsonToFile(json, name) {
+    const date = new Date();
+    //const filename = `${name}-${date.toISOString()}`;
+    const filename = name;
+    fs.writeFile(`./assets/generatedData/${filename}.json`, JSON.stringify(json), 'utf8', () => { });
+  }
+
   /**
    * Google vision pads with a 0 at the start hence -1
    * @param {*} imagesAnnotation 
@@ -39,7 +87,7 @@ class KMeansClustering {
    */
   getNaiveK(imagesAnnotation) { 
     const description = imagesAnnotation.annotationOverview.description;
-    return description.split('\n').length - 1;
+    return description.split('\n').length;
   }
 
   /**
@@ -51,24 +99,19 @@ class KMeansClustering {
     return vertices[3]
   }
 
-
-  getRandomCentroids(dataset, k) {
-    // selects random points as centroids from the dataset
-    const numSamples = dataset.length;
-    const centroidsIndex = [];
-    let index;
-    while (centroidsIndex.length < k) {
-      index = randomBetween(0, numSamples);
-      if (centroidsIndex.indexOf(index) === -1) {
-        centroidsIndex.push(index);
-      }
-    }
-    const centroids = [];
-    for (let i = 0; i < centroidsIndex.length; i++) {
-      const centroid = [...dataset[centroidsIndex[i]]];
-      centroids.push(centroid);
-    }
-    return centroids;
+  runPythonScript(json) { 
+    let result = {};
+    const python = spawn('python', ['./scripts/kmeansClustering.py']);
+    // collect data from script
+    python.stdout.on('data', function (data) {
+      console.log('Pipe data from python script ...');
+      result = data.toString();
+    });
+    // in close event we are sure that stream from child process is closed
+    python.on('close', (code) => {
+      console.log(`child process close all stdio with code ${code}`);
+    });
+    return result;
   }
 
 }

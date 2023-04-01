@@ -11,6 +11,18 @@ Handler of image and applying OCR on them using Google Cloud Vision
 |   Get   | /gc/test-sample      | Test google vision api with a local sample file |
 |   Post  | /gc/annotate-images  | Send images to Google Cloud vision for annotation return a JSON with the result |
 
+| Request | Routes               | Description |
+| ------- | -------------------- | ----------- |
+|   Get   | /kmeans                             | return a list of action for this route       |
+|   Get   | /kmeans/test-sample-json            |        |
+|   Get   | /kmeans/test-sample-data            |  |
+|   Get   | /kmeans/test-sample-centroid'       | |
+
+ 'Get -  ',
+      'Get -  ',
+      'Get -  ,
+      'Get -  ',
+    ]
 
 ## Google Cloud
 
