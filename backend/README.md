@@ -34,7 +34,7 @@ Drop it in the 'backend' directory and rename it 'ocrimageprocess-keyfilename.js
 
 ## Clustering
 
-Cluster detection in google vision result is done via python (called by nodejs backend), currently 3 methods are implemented :
+Cluster detection of google vision result is done via python (called by nodejs backend), currently 3 methods are implemented :
  - Ward Agglomerative Clustering
  - Mean Shift
  - KMeans
