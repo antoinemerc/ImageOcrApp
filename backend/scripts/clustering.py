@@ -32,19 +32,19 @@ class Clustering:
   def getDataFromJson(self, jsonData) -> Tuple[List[str], List, List]:
     """ Get data from the given json
     the Json has a structure like
-    {
-      "naiveK": 12,
-      "centers": [
-        {
-          "description": "O",
-          "x": 17,
-          "y": -231
-        },...
+    [
+      {
+        "naiveK": 12,
+        "centers": [
+          {
+            "description": "O",
+            "centroid": [17,-231],
+            "boundingPoly": [{  "x": 14,  "y": 111},{  "x": 145,  "y": 108},{  "x": 148,  "y": 228},{  "x": 17,  "y": 231}, ...]
+          },...
       ]
-    }
     Returns:
-      description: the attached description of the point
       points: List of array of points such as [[1,0],[3,6]] with [[x0,y0],[x1,x2]]
+      label: the attached description of the point
       boundingPoly: List of 4 corner of google vision bounding poly
     """
     points = []
@@ -53,7 +53,7 @@ class Clustering:
     for i in jsonData:
       for center in i['centers']:
         label.append(center['description'])
-        points.append([center['centroid'][0], center['centroid'][1]])
+        points.append([center['centroid']['x'], center['centroid']['y']])
         boundingPoly.append(center['boundingPoly'])
       
     return points, label, boundingPoly

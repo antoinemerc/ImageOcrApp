@@ -7,12 +7,10 @@ import numpy as np
 from Clustering import Clustering, ClusteringMethod
 
 
-
-
   # plt.scatter(cluster[0],cluster[1])
 
 # print(groupedClusters)
 
-plt.show()
+
 
   # Closing file
