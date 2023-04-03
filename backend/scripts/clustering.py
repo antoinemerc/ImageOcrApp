@@ -1,7 +1,9 @@
 import enum
 import json
 from pathlib import Path
+import sys
 from typing import List, Tuple
+from matplotlib import pyplot as plt
 
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering, KMeans
@@ -16,10 +18,10 @@ class ClusteringMethod(enum.Enum):
 class Clustering:
 
   def getRawJsonFromFile(self, jsonRelativePath) -> dict:
-    """ Get data from the specified jsonFile, default to assets/generatedData/generatedData.json if empty
+    """ Get data from the specified jsonFile, default to assets/sample/generatedDataSample.json if empty
     Returns; Json Dictionnary
     """
-    jsonRelativePath = jsonRelativePath if jsonRelativePath else "../assets/generatedData/generatedData.json"
+    jsonRelativePath = jsonRelativePath if jsonRelativePath else "../assets/sample/generatedDataSample.json"
     path = Path(__file__).parent / jsonRelativePath
     rawJson = None
     with path.open() as f:
@@ -27,7 +29,7 @@ class Clustering:
       rawJson = json.load(f)
     return rawJson
 
-  def getDataFromJson(self, jsonData) -> Tuple[List[int], List[int], List[str], List]:
+  def getDataFromJson(self, jsonData) -> Tuple[List[str], List, List]:
     """ Get data from the given json
     the Json has a structure like
     {
@@ -41,26 +43,23 @@ class Clustering:
       ]
     }
     Returns:
-      xPoints: List of x coordinate for points
-      yPoints: List of y coordinate for points
       description: the attached description of the point
       points: List of array of points such as [[1,0],[3,6]] with [[x0,y0],[x1,x2]]
+      boundingPoly: List of 4 corner of google vision bounding poly
     """
-    xPoints = []
-    yPoints = [] 
     points = []
     label = []
+    boundingPoly = []
     for i in jsonData:
       for center in i['centers']:
-        xPoints.append(center['x'])
-        yPoints.append(center['y'])
         label.append(center['description'])
-        points.append([center['x'], center['y']])
+        points.append([center['centroid'][0], center['centroid'][1]])
+        boundingPoly.append(center['boundingPoly'])
       
-    return xPoints, yPoints, label, points
+    return points, label, boundingPoly
 
-  def getMockDataFromJsonFile(self, jsonRelativePath = None) -> Tuple[List[int], List[int], List[str], List]:
-    """ Get data from the specified jsonFile, default to assets/generatedData/generatedData.json if empty
+  def getMockDataFromJsonFile(self, jsonRelativePath = None) -> Tuple:
+    """ Get data from the specified jsonFile, default to assets/sample/generatedDataSample.json if empty
     Returns: see getDataFromJson
     """
     jsonData = self.getRawJsonFromFile(jsonRelativePath)
@@ -81,34 +80,62 @@ class Clustering:
       res = AgglomerativeClustering(n_clusters=nbCluster, linkage="ward").fit_predict(npPoints)
     return res
 
-  def groupClusters(self, clusters, points, labels):
+  def groupClusters(self, clusters, points, labels, boundingPoly):
     groupedClusters = {}
     for i in range(len(clusters)):
       if clusters[i] in groupedClusters:
-        groupedClusters[clusters[i]].append((points[i], labels[i]))
+        groupedClusters[clusters[i]].append((points[i], labels[i], boundingPoly[i]))
       else:
-        groupedClusters[clusters[i]] = [(points[i], labels[i])]
+        groupedClusters[clusters[i]] = [(points[i], labels[i], boundingPoly[i])]
 
     return groupedClusters
 
-  def runClusterForTests(self):
+  def runClusterForTests(self, json=None):
 
-    xPoints, yPoints, labels, points = self.getMockDataFromJsonFile()
+    points, labels, boundingPoly = self.getMockDataFromJsonFile()
 
     npPoints = np.array(points)
-    npLabels = np.array(labels)
 
     clusters = self.getClusters(3, npPoints, ClusteringMethod.MEAN_SHIFT)
-    print(clusters)
-    groupedClusters = self.groupClusters(clusters, points, labels)
+    groupedClusters = self.groupClusters(clusters, points, labels, boundingPoly)
+    print(groupedClusters)
 
-    for key, item in groupedClusters.items():
-      print(f'{key}: {item}')
+  def clusteringGraph(self, json=None):
+    clusteringHelper = Clustering()
+    points, labels, boundingPoly = clusteringHelper.getMockDataFromJsonFile()
 
+    clusters = clusteringHelper.getClusters(3, np.array(points), ClusteringMethod.MEAN_SHIFT)
+    groupedClusters = clusteringHelper.groupClusters(clusters, points, labels, boundingPoly)
+
+    for cluster, pointsInCluster in groupedClusters.items():
+      xPointToScatter = []
+      yPointToScatter = []
+
+      for ([pointX, pointY], label, boundingPoly) in pointsInCluster:
+        xPointToScatter.append(pointX)
+        yPointToScatter.append(pointY)
+
+        plt.annotate(label, (pointX, pointY+0.5))
+      plt.scatter(xPointToScatter, yPointToScatter)
+
+    plt.show()
 
 def main():
-  cluster = Clustering()
-  cluster.runClusterForTests()
+  if len(sys.argv) > 1:
+    if str(sys.argv[1]) == "--data-only":
+      cluster = Clustering()
+      cluster.runClusterForTests()
+    elif str(sys.argv[1] == "--cluster-graph"):
+      cluster = Clustering()
+      cluster.clusteringGraph()
+  else:
+    msg = """
+    Direct run requires option, no option provided, options available for direct run:
+      --data-only : return parsed clusters as Json as output
+      --cluster-graph : display a scatter graph of sample 
+    Direct run uses sample file
+    """
+    print(msg)
 
 if __name__ == '__main__':
   main()

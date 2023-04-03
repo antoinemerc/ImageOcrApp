@@ -61,8 +61,8 @@ class KMeansClustering {
         const { x, y } = this.getQuadrilateralCenter(details.boundingPoly.vertices);
         return {
           description: details.description,
-          x,
-          y
+          centroid: [x,y*-1],
+          boundingPoly: details.boundingPoly.vertices
         }
       });
       return {
