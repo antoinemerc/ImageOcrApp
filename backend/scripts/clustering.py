@@ -84,9 +84,9 @@ class Clustering:
     groupedClusters = {}
     for i in range(len(clusters)):
       if clusters[i] in groupedClusters:
-        groupedClusters[clusters[i]].append((points[i], labels[i], boundingPoly[i]))
+        groupedClusters[clusters[i]].append({"point": points[i], "label": labels[i], "boundingPoly": boundingPoly[i]})
       else:
-        groupedClusters[clusters[i]] = [(points[i], labels[i], boundingPoly[i])]
+        groupedClusters[clusters[i]] = [{"point": points[i], "label": labels[i], "boundingPoly": boundingPoly[i]}]
 
     return groupedClusters
 
@@ -111,12 +111,12 @@ class Clustering:
       xPointToScatter = []
       yPointToScatter = []
 
-      for ([pointX, pointY], label, boundingPoly) in pointsInCluster:
-        xPointToScatter.append(pointX)
+      for dataPoint in pointsInCluster:
+        xPointToScatter.append(dataPoint["point"][0])
         # multiply by -1 as google vision origin is at bottom left, which messes up coordinate for graph to look like image
-        yPointToScatter.append(pointY * -1)
+        yPointToScatter.append(dataPoint["point"][1] * -1)
 
-        plt.annotate(label, (pointX, (pointY+0.5) * -1))
+        plt.annotate(dataPoint["label"], (dataPoint["point"][0], (dataPoint["point"][1]+0.5) * -1))
       plt.scatter(xPointToScatter, yPointToScatter)
 
     plt.show()
