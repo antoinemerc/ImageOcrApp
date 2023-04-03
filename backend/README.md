@@ -32,7 +32,7 @@ Drop it in the 'backend' directory and rename it 'ocrimageprocess-keyfilename.js
 Takes an image in a post request and submit it for annotation to google vision, result have this json structure
 | Json | Example               |
 | ---- | --------------------- |
-| {
+| <code>{
         "locations": [],
         "properties": [],
         "mid": "",
@@ -50,7 +50,7 @@ Takes an image in a post request and submit it for annotation to google vision, 
           ],
           "normalizedVertices": []
         }
-      }|<img width="266" alt="Capture d’écran 2023-04-03 à 18 03 25" src="https://user-images.githubusercontent.com/15010119/229565434-35a9918e-6553-4896-9145-36036aa4a4c3.png">|
+      }</code> | <img width="266" alt="Capture d’écran 2023-04-03 à 18 03 25" src="https://user-images.githubusercontent.com/15010119/229565434-35a9918e-6553-4896-9145-36036aa4a4c3.png"> |
 
 ## Clustering
 
