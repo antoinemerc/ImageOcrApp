@@ -1,45 +1,35 @@
-import json
 from pathlib import Path
 from matplotlib import pyplot
 import matplotlib.pyplot as plt
 
 from matplotlib.pyplot import plot
 import numpy as np
-from sklearn.cluster import AgglomerativeClustering
+from Clustering import Clustering, ClusteringMethod
 
-def getData():
-  path = Path(__file__).parent / "../assets/generatedData/generatedData.json"
-  xPoints = []
-  yPoints = [] 
-  points = []
-  label = []
-  with path.open() as f:
-    # returns JSON object as a dictionary
-    data = json.load(f)
-    for i in data:
-      for center in i['centers']:
-        xPoints.append(center['x'])
-        yPoints.append(center['y'])
-        points.append([center['x'], center['y']])
-        label.append(center['description'])
-    
-  return xPoints, yPoints, label, points
-
-xPoints, yPoints, labels, points = getData()
-
-plt.scatter(xPoints,yPoints)
+clusteringHelper = Clustering()
+xPoints, yPoints, labels, points = clusteringHelper.getMockDataFromJsonFile()
 
 npPoints = np.array(points)
-ward = AgglomerativeClustering(n_clusters=3, linkage="ward").fit_predict(npPoints)
+npLabels = np.array(labels)
 
-clusters = {}
-for i in range(len(ward)):
-  if ward[i] in clusters:
-    clusters[i].append([xPoints[i], yPoints[i]], labels[i])
-  else:
-    clusters[i] = [[xPoints[i], yPoints[i]], labels[i]]
+clusters = clusteringHelper.getClusters(3, npPoints, ClusteringMethod.MEAN_SHIFT)
+groupedClusters = clusteringHelper.groupClusters(clusters, points, labels)
 
-print(clusters)
+for cluster, pointsInCluster in groupedClusters.items():
+  xPointToScatter = []
+  yPointToScatter = []
+
+  for ([pointX, pointY], label) in pointsInCluster:
+    xPointToScatter.append(pointX)
+    yPointToScatter.append(pointY)
+
+    plt.annotate(label, (pointX, pointY+0.5))
+  plt.scatter(xPointToScatter, yPointToScatter)
+
+
+  # plt.scatter(cluster[0],cluster[1])
+
+# print(groupedClusters)
 
 for j in range(len(xPoints)):
   plt.annotate(labels[j], (xPoints[j], yPoints[j]+0.5))
