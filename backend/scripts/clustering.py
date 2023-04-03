@@ -113,9 +113,10 @@ class Clustering:
 
       for ([pointX, pointY], label, boundingPoly) in pointsInCluster:
         xPointToScatter.append(pointX)
-        yPointToScatter.append(pointY)
+        # multiply by -1 as google vision origin is at bottom left, which messes up coordinate for graph to look like image
+        yPointToScatter.append(pointY * -1)
 
-        plt.annotate(label, (pointX, pointY+0.5))
+        plt.annotate(label, (pointX, (pointY+0.5) * -1))
       plt.scatter(xPointToScatter, yPointToScatter)
 
     plt.show()
