@@ -15,7 +15,7 @@ class ClusteringMethod(enum.Enum):
     MEAN_SHIFT = 'meanShift'
     WARD_AGGLO_CLUSTERING = 'ward'
 
-class Clustering:
+class ClusteringHelper:
 
   def getRawJsonFromFile(self, jsonRelativePath) -> dict:
     """ Get data from the specified jsonFile, default to assets/sample/generatedDataSample.json if empty
@@ -136,12 +136,12 @@ class Clustering:
 def main():
   if len(sys.argv) > 1:
     if str(sys.argv[1]) == "--data-only":
-      cluster = Clustering()
+      cluster = ClusteringHelper()
       allGroupedClusters = cluster.getClusterForTests()
       print(allGroupedClusters)
 
     elif str(sys.argv[1] == "--cluster-graph"):
-      cluster = Clustering()
+      cluster = ClusteringHelper()
       allGroupedClusters = cluster.getClusterForTests()
       cluster.clusterGraph(allGroupedClusters)
   else:

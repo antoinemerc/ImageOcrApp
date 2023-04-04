@@ -1,1 +1,0 @@
-Tesseract implementation in python?

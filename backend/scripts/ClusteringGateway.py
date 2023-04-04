@@ -1,10 +1,10 @@
 import json
 import sys
-from Clustering import Clustering, ClusteringMethod
+from ClusteringHelper import ClusteringHelper, ClusteringMethod
 
 def main():
   if len(sys.argv) > 1:
-    clusteringHelper = Clustering()
+    clusteringHelper = ClusteringHelper()
     allGroupedClusters = []
 
     if str(sys.argv[1]) == "--json":
