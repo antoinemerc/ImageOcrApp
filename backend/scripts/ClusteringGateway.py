@@ -10,16 +10,18 @@ def main():
     if str(sys.argv[1]) == "--json":
       jsonData = json.load(sys.argv[2])
       allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
-      json.dumps(allGroupedClusters)
+      json.dumps(allGroupedClusters, sys.stdout, indent=2)
 
     elif str(sys.argv[1] )== "--json-file":
       jsonData = clusteringHelper.getRawJsonFromFile(sys.argv[2])
       allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
       json.dump(allGroupedClusters, sys.stdout, indent=2)
 
-    if str(sys.argv[3]) == "--graph":
+    if "--graph" in sys.argv and sys.argv[1] in ["--json", "--json-file"]:
       clusteringHelper.clusterGraph(allGroupedClusters)
+
   else:
+    # TODO: Add options to change clustering method and a cluster number input 
     msg = """
     Direct run requires primary option, no option provided, options available for direct run:
       --json : run clustering on json provided as option
