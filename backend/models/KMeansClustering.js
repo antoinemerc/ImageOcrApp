@@ -22,13 +22,16 @@ class Centers {
  * Input:
  * 
  * JsonFile {
- *  naiveK: number the number of points found, naively each can be a cluster
- *  realK: number the user given "true number" of clusters to be found
- *  centers: {
- *    x: number
- *    y: number
- *    description: string
- *  }[]
+ *  [
+ *     {
+ *       "naiveK": 12,
+ *       "centers": [
+ *         {
+ *           "description": "O",
+ *           "centroid": [17,-231],
+ *           "boundingPoly": [{  "x": 14,  "y": 111},{  "x": 145,  "y": 108},{  "x": 148,  "y": 228},{  "x": 17,  "y": 231}, ...]
+ *         },...
+ *   ]
  * }
  * 
  * Python script that takes this input and run it through kmeans clustering transforms this data into output Json structure
@@ -36,10 +39,11 @@ class Centers {
  * Wanted Output:
  * 
  *  ReturnStructure {
- *     nbrCluster: number, the number of cluster
+ *     0: [ ([x, y], 'O', [{'x': 14, 'y': 111}, {'x': 145, 'y': 108}, {'x': 148, 'y': 228}, {'x': 17, 'y': 231}])]
  *     clusters: {
- *        description: string;
- *        points: points as received in google vision part of the cluster
+ *        label: string;
+ *        points: [x, y],
+*         boundingPoly: [{  "x": 14,  "y": 111},{  "x": 145,  "y": 108},{  "x": 148,  "y": 228},{  "x": 17,  "y": 231}, ...]
  *     }[]
  *  }
  */
@@ -61,7 +65,7 @@ class KMeansClustering {
         const { x, y } = this.getQuadrilateralCenter(details.boundingPoly.vertices);
         return {
           description: details.description,
-          centroid: [x,y*-1],
+          centroid: { x: x, y: y },
           boundingPoly: details.boundingPoly.vertices
         }
       });

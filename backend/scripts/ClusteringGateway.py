@@ -1,21 +1,24 @@
 import json
 import sys
-from Clustering import Clustering
+from Clustering import Clustering, ClusteringMethod
 
 def main():
   if len(sys.argv) > 1:
+    clusteringHelper = Clustering()
+    allGroupedClusters = []
+
     if str(sys.argv[1]) == "--json":
-      clusteringHelper = Clustering()
       jsonData = json.load(sys.argv[2])
-      groupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData)
-      json.dumps(groupedClusters)
+      allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
+      json.dumps(allGroupedClusters)
 
-    elif str(sys.argv[1] == "--json-file"):
-      clusteringHelper = Clustering()
+    elif str(sys.argv[1] )== "--json-file":
       jsonData = clusteringHelper.getRawJsonFromFile(sys.argv[2])
-      groupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData)
-      json.dumps(groupedClusters)
+      allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
+      json.dump(allGroupedClusters, sys.stdout, indent=2)
 
+    if str(sys.argv[3]) == "--graph":
+      clusteringHelper.clusterGraph(allGroupedClusters)
   else:
     msg = """
     Direct run requires primary option, no option provided, options available for direct run:
@@ -25,7 +28,9 @@ def main():
     Generic options (can be added after primary option and input):
       --graph : Output a graph based on json
       
-      ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph     
+      ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph   
+
+    Note that the path to a json file is built from the directory of the script, account for it when launching from another directory
     """
     print(msg)
 

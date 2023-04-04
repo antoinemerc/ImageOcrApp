@@ -4,10 +4,10 @@
     "centers": [
       {
         "description": "O",
-        "centroid": [
-          17,
-          -231
-        ],
+        "centroid": {
+          "x": 17,
+          "y": 231
+        },
         "boundingPoly": [
           {
             "x": 14,
@@ -29,10 +29,10 @@
       },
       {
         "description": "CLENCH",
-        "centroid": [
-          257,
-          -408
-        ],
+        "centroid": {
+          "x": 257,
+          "y": 408
+        },
         "boundingPoly": [
           {
             "x": 262,
@@ -54,10 +54,10 @@
       },
       {
         "description": "IF",
-        "centroid": [
-          134,
-          -531
-        ],
+        "centroid": {
+          "x": 134,
+          "y": 531
+        },
         "boundingPoly": [
           {
             "x": 134,
@@ -79,10 +79,10 @@
       },
       {
         "description": "YOU",
-        "centroid": [
-          161,
-          -531
-        ],
+        "centroid": {
+          "x": 161,
+          "y": 531
+        },
         "boundingPoly": [
           {
             "x": 161,
@@ -104,10 +104,10 @@
       },
       {
         "description": "FEEL",
-        "centroid": [
-          224,
-          -531
-        ],
+        "centroid": {
+          "x": 224,
+          "y": 531
+        },
         "boundingPoly": [
           {
             "x": 224,
@@ -129,10 +129,10 @@
       },
       {
         "description": "UNCOMFORTABLE",
-        "centroid": [
-          91,
-          -566
-        ],
+        "centroid": {
+          "x": 91,
+          "y": 566
+        },
         "boundingPoly": [
           {
             "x": 91,
@@ -154,10 +154,10 @@
       },
       {
         "description": "COMING",
-        "centroid": [
-          89,
-          -600
-        ],
+        "centroid": {
+          "x": 89,
+          "y": 600
+        },
         "boundingPoly": [
           {
             "x": 89,
@@ -179,10 +179,10 @@
       },
       {
         "description": "UP",
-        "centroid": [
-          208,
-          -600
-        ],
+        "centroid": {
+          "x": 208,
+          "y": 600
+        },
         "boundingPoly": [
           {
             "x": 208,
@@ -204,10 +204,10 @@
       },
       {
         "description": "WITH",
-        "centroid": [
-          246,
-          -600
-        ],
+        "centroid": {
+          "x": 246,
+          "y": 600
+        },
         "boundingPoly": [
           {
             "x": 246,
@@ -229,10 +229,10 @@
       },
       {
         "description": "SOMETHING",
-        "centroid": [
-          46,
-          -636
-        ],
+        "centroid": {
+          "x": 46,
+          "y": 636
+        },
         "boundingPoly": [
           {
             "x": 46,
@@ -254,10 +254,10 @@
       },
       {
         "description": "TO",
-        "centroid": [
-          211,
-          -637
-        ],
+        "centroid": {
+          "x": 211,
+          "y": 637
+        },
         "boundingPoly": [
           {
             "x": 211,
@@ -279,10 +279,10 @@
       },
       {
         "description": "DISCUSS",
-        "centroid": [
-          253,
-          -637
-        ],
+        "centroid": {
+          "x": 253,
+          "y": 637
+        },
         "boundingPoly": [
           {
             "x": 253,
@@ -304,10 +304,10 @@
       },
       {
         "description": ",",
-        "centroid": [
-          362,
-          -638
-        ],
+        "centroid": {
+          "x": 362,
+          "y": 638
+        },
         "boundingPoly": [
           {
             "x": 362,
@@ -329,10 +329,10 @@
       },
       {
         "description": "HOW",
-        "centroid": [
-          75,
-          -671
-        ],
+        "centroid": {
+          "x": 75,
+          "y": 671
+        },
         "boundingPoly": [
           {
             "x": 75,
@@ -354,10 +354,10 @@
       },
       {
         "description": "ABOUT",
-        "centroid": [
-          148,
-          -671
-        ],
+        "centroid": {
+          "x": 148,
+          "y": 671
+        },
         "boundingPoly": [
           {
             "x": 148,
@@ -379,10 +379,10 @@
       },
       {
         "description": "DOING",
-        "centroid": [
-          244,
-          -671
-        ],
+        "centroid": {
+          "x": 244,
+          "y": 671
+        },
         "boundingPoly": [
           {
             "x": 244,
@@ -404,10 +404,10 @@
       },
       {
         "description": "SOMETHING",
-        "centroid": [
-          96,
-          -706
-        ],
+        "centroid": {
+          "x": 96,
+          "y": 706
+        },
         "boundingPoly": [
           {
             "x": 96,
@@ -429,10 +429,10 @@
       },
       {
         "description": "LIKE",
-        "centroid": [
-          263,
-          -706
-        ],
+        "centroid": {
+          "x": 263,
+          "y": 706
+        },
         "boundingPoly": [
           {
             "x": 263,
@@ -454,10 +454,10 @@
       },
       {
         "description": "\"",
-        "centroid": [
-          120,
-          -741
-        ],
+        "centroid": {
+          "x": 120,
+          "y": 741
+        },
         "boundingPoly": [
           {
             "x": 120,
@@ -479,10 +479,10 @@
       },
       {
         "description": "WOULD",
-        "centroid": [
-          130,
-          -741
-        ],
+        "centroid": {
+          "x": 130,
+          "y": 741
+        },
         "boundingPoly": [
           {
             "x": 130,
@@ -504,10 +504,10 @@
       },
       {
         "description": "YOU",
-        "centroid": [
-          237,
-          -741
-        ],
+        "centroid": {
+          "x": 237,
+          "y": 741
+        },
         "boundingPoly": [
           {
             "x": 237,
@@ -529,10 +529,10 @@
       },
       {
         "description": "RATHER",
-        "centroid": [
-          138,
-          -776
-        ],
+        "centroid": {
+          "x": 138,
+          "y": 776
+        },
         "boundingPoly": [
           {
             "x": 138,
@@ -554,10 +554,10 @@
       },
       {
         "description": "\"",
-        "centroid": [
-          239,
-          -775
-        ],
+        "centroid": {
+          "x": 239,
+          "y": 775
+        },
         "boundingPoly": [
           {
             "x": 239,
@@ -579,10 +579,10 @@
       },
       {
         "description": "?!",
-        "centroid": [
-          252,
-          -775
-        ],
+        "centroid": {
+          "x": 252,
+          "y": 775
+        },
         "boundingPoly": [
           {
             "x": 252,
@@ -604,10 +604,10 @@
       },
       {
         "description": "DON'T",
-        "centroid": [
-          370,
-          -864
-        ],
+        "centroid": {
+          "x": 370,
+          "y": 864
+        },
         "boundingPoly": [
           {
             "x": 370,
@@ -629,10 +629,10 @@
       },
       {
         "description": "WORRY",
-        "centroid": [
-          458,
-          -864
-        ],
+        "centroid": {
+          "x": 458,
+          "y": 864
+        },
         "boundingPoly": [
           {
             "x": 458,
@@ -654,10 +654,10 @@
       },
       {
         "description": ",",
-        "centroid": [
-          555,
-          -864
-        ],
+        "centroid": {
+          "x": 555,
+          "y": 864
+        },
         "boundingPoly": [
           {
             "x": 555,
@@ -679,10 +679,10 @@
       },
       {
         "description": "WE'LL",
-        "centroid": [
-          350,
-          -896
-        ],
+        "centroid": {
+          "x": 350,
+          "y": 896
+        },
         "boundingPoly": [
           {
             "x": 350,
@@ -704,10 +704,10 @@
       },
       {
         "description": "HELP",
-        "centroid": [
-          432,
-          -896
-        ],
+        "centroid": {
+          "x": 432,
+          "y": 896
+        },
         "boundingPoly": [
           {
             "x": 432,
@@ -729,10 +729,10 @@
       },
       {
         "description": "YOU",
-        "centroid": [
-          502,
-          -896
-        ],
+        "centroid": {
+          "x": 502,
+          "y": 896
+        },
         "boundingPoly": [
           {
             "x": 502,
@@ -754,10 +754,790 @@
       },
       {
         "description": "!!",
-        "centroid": [
-          561,
-          -896
-        ],
+        "centroid": {
+          "x": 561,
+          "y": 896
+        },
+        "boundingPoly": [
+          {
+            "x": 561,
+            "y": 877
+          },
+          {
+            "x": 578,
+            "y": 877
+          },
+          {
+            "x": 578,
+            "y": 896
+          },
+          {
+            "x": 561,
+            "y": 896
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "naiveK": 12,
+    "centers": [
+      {
+        "description": "O",
+        "centroid": {
+          "x": 17,
+          "y": 231
+        },
+        "boundingPoly": [
+          {
+            "x": 14,
+            "y": 111
+          },
+          {
+            "x": 145,
+            "y": 108
+          },
+          {
+            "x": 148,
+            "y": 228
+          },
+          {
+            "x": 17,
+            "y": 231
+          }
+        ]
+      },
+      {
+        "description": "CLENCH",
+        "centroid": {
+          "x": 257,
+          "y": 408
+        },
+        "boundingPoly": [
+          {
+            "x": 262,
+            "y": 371
+          },
+          {
+            "x": 390,
+            "y": 389
+          },
+          {
+            "x": 385,
+            "y": 426
+          },
+          {
+            "x": 257,
+            "y": 408
+          }
+        ]
+      },
+      {
+        "description": "IF",
+        "centroid": {
+          "x": 134,
+          "y": 531
+        },
+        "boundingPoly": [
+          {
+            "x": 134,
+            "y": 512
+          },
+          {
+            "x": 155,
+            "y": 512
+          },
+          {
+            "x": 155,
+            "y": 531
+          },
+          {
+            "x": 134,
+            "y": 531
+          }
+        ]
+      },
+      {
+        "description": "YOU",
+        "centroid": {
+          "x": 161,
+          "y": 531
+        },
+        "boundingPoly": [
+          {
+            "x": 161,
+            "y": 512
+          },
+          {
+            "x": 215,
+            "y": 512
+          },
+          {
+            "x": 215,
+            "y": 531
+          },
+          {
+            "x": 161,
+            "y": 531
+          }
+        ]
+      },
+      {
+        "description": "FEEL",
+        "centroid": {
+          "x": 224,
+          "y": 531
+        },
+        "boundingPoly": [
+          {
+            "x": 224,
+            "y": 512
+          },
+          {
+            "x": 280,
+            "y": 512
+          },
+          {
+            "x": 280,
+            "y": 531
+          },
+          {
+            "x": 224,
+            "y": 531
+          }
+        ]
+      },
+      {
+        "description": "UNCOMFORTABLE",
+        "centroid": {
+          "x": 91,
+          "y": 566
+        },
+        "boundingPoly": [
+          {
+            "x": 91,
+            "y": 544
+          },
+          {
+            "x": 321,
+            "y": 545
+          },
+          {
+            "x": 321,
+            "y": 567
+          },
+          {
+            "x": 91,
+            "y": 566
+          }
+        ]
+      },
+      {
+        "description": "COMING",
+        "centroid": {
+          "x": 89,
+          "y": 600
+        },
+        "boundingPoly": [
+          {
+            "x": 89,
+            "y": 581
+          },
+          {
+            "x": 198,
+            "y": 581
+          },
+          {
+            "x": 198,
+            "y": 600
+          },
+          {
+            "x": 89,
+            "y": 600
+          }
+        ]
+      },
+      {
+        "description": "UP",
+        "centroid": {
+          "x": 208,
+          "y": 600
+        },
+        "boundingPoly": [
+          {
+            "x": 208,
+            "y": 581
+          },
+          {
+            "x": 241,
+            "y": 581
+          },
+          {
+            "x": 241,
+            "y": 600
+          },
+          {
+            "x": 208,
+            "y": 600
+          }
+        ]
+      },
+      {
+        "description": "WITH",
+        "centroid": {
+          "x": 246,
+          "y": 600
+        },
+        "boundingPoly": [
+          {
+            "x": 246,
+            "y": 581
+          },
+          {
+            "x": 316,
+            "y": 581
+          },
+          {
+            "x": 316,
+            "y": 600
+          },
+          {
+            "x": 246,
+            "y": 600
+          }
+        ]
+      },
+      {
+        "description": "SOMETHING",
+        "centroid": {
+          "x": 46,
+          "y": 636
+        },
+        "boundingPoly": [
+          {
+            "x": 46,
+            "y": 615
+          },
+          {
+            "x": 206,
+            "y": 616
+          },
+          {
+            "x": 206,
+            "y": 637
+          },
+          {
+            "x": 46,
+            "y": 636
+          }
+        ]
+      },
+      {
+        "description": "TO",
+        "centroid": {
+          "x": 211,
+          "y": 637
+        },
+        "boundingPoly": [
+          {
+            "x": 211,
+            "y": 617
+          },
+          {
+            "x": 244,
+            "y": 617
+          },
+          {
+            "x": 244,
+            "y": 637
+          },
+          {
+            "x": 211,
+            "y": 637
+          }
+        ]
+      },
+      {
+        "description": "DISCUSS",
+        "centroid": {
+          "x": 253,
+          "y": 637
+        },
+        "boundingPoly": [
+          {
+            "x": 253,
+            "y": 616
+          },
+          {
+            "x": 358,
+            "y": 617
+          },
+          {
+            "x": 358,
+            "y": 638
+          },
+          {
+            "x": 253,
+            "y": 637
+          }
+        ]
+      },
+      {
+        "description": ",",
+        "centroid": {
+          "x": 362,
+          "y": 638
+        },
+        "boundingPoly": [
+          {
+            "x": 362,
+            "y": 618
+          },
+          {
+            "x": 368,
+            "y": 618
+          },
+          {
+            "x": 368,
+            "y": 638
+          },
+          {
+            "x": 362,
+            "y": 638
+          }
+        ]
+      },
+      {
+        "description": "HOW",
+        "centroid": {
+          "x": 75,
+          "y": 671
+        },
+        "boundingPoly": [
+          {
+            "x": 75,
+            "y": 652
+          },
+          {
+            "x": 138,
+            "y": 652
+          },
+          {
+            "x": 138,
+            "y": 671
+          },
+          {
+            "x": 75,
+            "y": 671
+          }
+        ]
+      },
+      {
+        "description": "ABOUT",
+        "centroid": {
+          "x": 148,
+          "y": 671
+        },
+        "boundingPoly": [
+          {
+            "x": 148,
+            "y": 652
+          },
+          {
+            "x": 238,
+            "y": 652
+          },
+          {
+            "x": 238,
+            "y": 671
+          },
+          {
+            "x": 148,
+            "y": 671
+          }
+        ]
+      },
+      {
+        "description": "DOING",
+        "centroid": {
+          "x": 244,
+          "y": 671
+        },
+        "boundingPoly": [
+          {
+            "x": 244,
+            "y": 652
+          },
+          {
+            "x": 332,
+            "y": 652
+          },
+          {
+            "x": 332,
+            "y": 671
+          },
+          {
+            "x": 244,
+            "y": 671
+          }
+        ]
+      },
+      {
+        "description": "SOMETHING",
+        "centroid": {
+          "x": 96,
+          "y": 706
+        },
+        "boundingPoly": [
+          {
+            "x": 96,
+            "y": 687
+          },
+          {
+            "x": 255,
+            "y": 687
+          },
+          {
+            "x": 255,
+            "y": 706
+          },
+          {
+            "x": 96,
+            "y": 706
+          }
+        ]
+      },
+      {
+        "description": "LIKE",
+        "centroid": {
+          "x": 263,
+          "y": 706
+        },
+        "boundingPoly": [
+          {
+            "x": 263,
+            "y": 687
+          },
+          {
+            "x": 316,
+            "y": 687
+          },
+          {
+            "x": 316,
+            "y": 706
+          },
+          {
+            "x": 263,
+            "y": 706
+          }
+        ]
+      },
+      {
+        "description": "\"",
+        "centroid": {
+          "x": 120,
+          "y": 741
+        },
+        "boundingPoly": [
+          {
+            "x": 120,
+            "y": 722
+          },
+          {
+            "x": 129,
+            "y": 722
+          },
+          {
+            "x": 129,
+            "y": 741
+          },
+          {
+            "x": 120,
+            "y": 741
+          }
+        ]
+      },
+      {
+        "description": "WOULD",
+        "centroid": {
+          "x": 130,
+          "y": 741
+        },
+        "boundingPoly": [
+          {
+            "x": 130,
+            "y": 722
+          },
+          {
+            "x": 230,
+            "y": 722
+          },
+          {
+            "x": 230,
+            "y": 741
+          },
+          {
+            "x": 130,
+            "y": 741
+          }
+        ]
+      },
+      {
+        "description": "YOU",
+        "centroid": {
+          "x": 237,
+          "y": 741
+        },
+        "boundingPoly": [
+          {
+            "x": 237,
+            "y": 722
+          },
+          {
+            "x": 291,
+            "y": 722
+          },
+          {
+            "x": 291,
+            "y": 741
+          },
+          {
+            "x": 237,
+            "y": 741
+          }
+        ]
+      },
+      {
+        "description": "RATHER",
+        "centroid": {
+          "x": 138,
+          "y": 776
+        },
+        "boundingPoly": [
+          {
+            "x": 138,
+            "y": 756
+          },
+          {
+            "x": 239,
+            "y": 755
+          },
+          {
+            "x": 239,
+            "y": 775
+          },
+          {
+            "x": 138,
+            "y": 776
+          }
+        ]
+      },
+      {
+        "description": "\"",
+        "centroid": {
+          "x": 239,
+          "y": 775
+        },
+        "boundingPoly": [
+          {
+            "x": 239,
+            "y": 756
+          },
+          {
+            "x": 248,
+            "y": 756
+          },
+          {
+            "x": 248,
+            "y": 775
+          },
+          {
+            "x": 239,
+            "y": 775
+          }
+        ]
+      },
+      {
+        "description": "?!",
+        "centroid": {
+          "x": 252,
+          "y": 775
+        },
+        "boundingPoly": [
+          {
+            "x": 252,
+            "y": 756
+          },
+          {
+            "x": 274,
+            "y": 756
+          },
+          {
+            "x": 274,
+            "y": 775
+          },
+          {
+            "x": 252,
+            "y": 775
+          }
+        ]
+      },
+      {
+        "description": "DON'T",
+        "centroid": {
+          "x": 370,
+          "y": 864
+        },
+        "boundingPoly": [
+          {
+            "x": 370,
+            "y": 841
+          },
+          {
+            "x": 453,
+            "y": 841
+          },
+          {
+            "x": 453,
+            "y": 864
+          },
+          {
+            "x": 370,
+            "y": 864
+          }
+        ]
+      },
+      {
+        "description": "WORRY",
+        "centroid": {
+          "x": 458,
+          "y": 864
+        },
+        "boundingPoly": [
+          {
+            "x": 458,
+            "y": 841
+          },
+          {
+            "x": 556,
+            "y": 841
+          },
+          {
+            "x": 556,
+            "y": 864
+          },
+          {
+            "x": 458,
+            "y": 864
+          }
+        ]
+      },
+      {
+        "description": ",",
+        "centroid": {
+          "x": 555,
+          "y": 864
+        },
+        "boundingPoly": [
+          {
+            "x": 555,
+            "y": 841
+          },
+          {
+            "x": 562,
+            "y": 841
+          },
+          {
+            "x": 562,
+            "y": 864
+          },
+          {
+            "x": 555,
+            "y": 864
+          }
+        ]
+      },
+      {
+        "description": "WE'LL",
+        "centroid": {
+          "x": 350,
+          "y": 896
+        },
+        "boundingPoly": [
+          {
+            "x": 350,
+            "y": 877
+          },
+          {
+            "x": 426,
+            "y": 877
+          },
+          {
+            "x": 426,
+            "y": 896
+          },
+          {
+            "x": 350,
+            "y": 896
+          }
+        ]
+      },
+      {
+        "description": "HELP",
+        "centroid": {
+          "x": 432,
+          "y": 896
+        },
+        "boundingPoly": [
+          {
+            "x": 432,
+            "y": 877
+          },
+          {
+            "x": 496,
+            "y": 877
+          },
+          {
+            "x": 496,
+            "y": 896
+          },
+          {
+            "x": 432,
+            "y": 896
+          }
+        ]
+      },
+      {
+        "description": "YOU",
+        "centroid": {
+          "x": 502,
+          "y": 896
+        },
+        "boundingPoly": [
+          {
+            "x": 502,
+            "y": 877
+          },
+          {
+            "x": 556,
+            "y": 877
+          },
+          {
+            "x": 556,
+            "y": 896
+          },
+          {
+            "x": 502,
+            "y": 896
+          }
+        ]
+      },
+      {
+        "description": "!!",
+        "centroid": {
+          "x": 561,
+          "y": 896
+        },
         "boundingPoly": [
           {
             "x": 561,
