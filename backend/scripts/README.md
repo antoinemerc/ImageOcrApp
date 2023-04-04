@@ -1,6 +1,6 @@
 # Clustering Helpers
 
-These python classes are used
+These python classes are used, Gateway should be the class used to run the clustering
 
 ## Clustering Gateway
 
@@ -15,7 +15,7 @@ ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json 
 
 Note that the path to a json file is built from the directory of the script, account for it when launching from another directory
 
-## ClusteringHelper
+## Clustering Helper
 
 Direct run requires option, no option provided, options available for direct run:
 
