@@ -1,16 +1,33 @@
-from pathlib import Path
-from matplotlib import pyplot
-import matplotlib.pyplot as plt
+import json
+import sys
+from Clustering import Clustering
 
-from matplotlib.pyplot import plot
-import numpy as np
-from Clustering import Clustering, ClusteringMethod
+def main():
+  if len(sys.argv) > 1:
+    if str(sys.argv[1]) == "--json":
+      clusteringHelper = Clustering()
+      jsonData = json.load(sys.argv[2])
+      groupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData)
+      json.dumps(groupedClusters)
 
+    elif str(sys.argv[1] == "--json-file"):
+      clusteringHelper = Clustering()
+      jsonData = clusteringHelper.getRawJsonFromFile(sys.argv[2])
+      groupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData)
+      json.dumps(groupedClusters)
 
-  # plt.scatter(cluster[0],cluster[1])
+  else:
+    msg = """
+    Direct run requires primary option, no option provided, options available for direct run:
+      --json : run clustering on json provided as option
+      --json-file : run clustering on json file, with path provided as option , path is relative to current location
+    
+    Generic options (can be added after primary option and input):
+      --graph : Output a graph based on json
+      
+      ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph     
+    """
+    print(msg)
 
-# print(groupedClusters)
-
-
-
-  # Closing file
+if __name__ == '__main__':
+  main()

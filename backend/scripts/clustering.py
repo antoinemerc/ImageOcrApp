@@ -30,7 +30,8 @@ class Clustering:
     return rawJson
 
   def getDataFromJson(self, jsonData) -> Tuple[List[str], List, List]:
-    """ Get data from the given json
+    """ TODO: I forgor to handle multiple image in a vision request >:(
+    Get data from the given json
     the Json has a structure like
     [
       {
@@ -89,24 +90,26 @@ class Clustering:
         groupedClusters[clusters[i]] = [{"point": points[i], "label": labels[i], "boundingPoly": boundingPoly[i]}]
 
     return groupedClusters
-
-  def runClusterForTests(self, json=None):
-
-    points, labels, boundingPoly = self.getMockDataFromJsonFile()
-
+  
+  def getGroupedClusterFromJson(self, jsonData, clusteringMethod: ClusteringMethod):
+    """ Get Grouped cluster from Json and output them """
+    points, labels, boundingPoly = self.getDataFromJson(jsonData)
     npPoints = np.array(points)
-
-    clusters = self.getClusters(3, npPoints, ClusteringMethod.MEAN_SHIFT)
+    clusters = self.getClusters(3, npPoints, clusteringMethod)
     groupedClusters = self.groupClusters(clusters, points, labels, boundingPoly)
-    print(groupedClusters)
+    return groupedClusters
 
-  def clusteringGraph(self, json=None):
-    clusteringHelper = Clustering()
-    points, labels, boundingPoly = clusteringHelper.getMockDataFromJsonFile()
+  def getClusterForTests(self):
+    """ Get Sample Json and output it's grouped cluster """
+    points, labels, boundingPoly = self.getMockDataFromJsonFile()
+    clusters = self.getClusters(3, np.array(points), ClusteringMethod.MEAN_SHIFT)
+    groupedClusters = self.groupClusters(clusters, points, labels, boundingPoly)
+    return groupedClusters
 
-    clusters = clusteringHelper.getClusters(3, np.array(points), ClusteringMethod.MEAN_SHIFT)
-    groupedClusters = clusteringHelper.groupClusters(clusters, points, labels, boundingPoly)
-
+  def clusterGraph(self, groupedClusters=None):
+    """ Displays a graph representation of given groupedClusters, will give sample if none provided """
+    groupedClusters = groupedClusters if groupedClusters != None else self.getClusterForTests()
+    
     for cluster, pointsInCluster in groupedClusters.items():
       xPointToScatter = []
       yPointToScatter = []
@@ -119,16 +122,19 @@ class Clustering:
         plt.annotate(dataPoint["label"], (dataPoint["point"][0], (dataPoint["point"][1]+0.5) * -1))
       plt.scatter(xPointToScatter, yPointToScatter)
 
-    plt.show()
+      plt.show()
 
 def main():
   if len(sys.argv) > 1:
     if str(sys.argv[1]) == "--data-only":
       cluster = Clustering()
-      cluster.runClusterForTests()
+      groupedClusters = cluster.getClusterForTests()
+      print(groupedClusters)
+
     elif str(sys.argv[1] == "--cluster-graph"):
       cluster = Clustering()
-      cluster.clusteringGraph()
+      groupedClusters = cluster.getClusterForTests()
+      cluster.clusterGraph(groupedClusters)
   else:
     msg = """
     Direct run requires option, no option provided, options available for direct run:
