@@ -18,10 +18,10 @@ class ClusteringMethod(enum.Enum):
 class ClusteringHelper:
 
   def getRawJsonFromFile(self, jsonRelativePath) -> dict:
-    """ Get data from the specified jsonFile, default to assets/sample/generatedDataSample.json if empty
+    """ Get data from the specified jsonFile, default to assets/sample/sanitizedGoogleVisionJson.json if empty
     Returns; Json Dictionnary
     """
-    jsonRelativePath = jsonRelativePath if jsonRelativePath else "../assets/sample/generatedDataSample.json"
+    jsonRelativePath = jsonRelativePath if jsonRelativePath else "../assets/sample/sanitizedGoogleVisionJson.json"
     path = Path(__file__).parent / jsonRelativePath
     rawJson = None
     with path.open() as f:
@@ -32,15 +32,20 @@ class ClusteringHelper:
   def getDataFromJson(self, jsonData) -> List[Tuple[List[str], List, List]]:
     """
     Get data from the given json
-    the Json has a structure like
+    the Json has a structure like this, it's a sanitized version of the google vision json for simplicity
     [
       {
-        "naiveK": 12,
-        "centers": [
+        "annotation": [
           {
             "description": "O",
-            "centroid": [17,-231],
-            "boundingPoly": [{  "x": 14,  "y": 111},{  "x": 145,  "y": 108},{  "x": 148,  "y": 228},{  "x": 17,  "y": 231}, ...]
+            "boundingPoly": {
+              "vertices": [
+                {  "x": 14,  "y": 111},
+                {  "x": 145,  "y": 108},
+                {  "x": 148,  "y": 228},
+                {  "x": 17,  "y": 231}
+              ]
+            }
           },...
       ]
     Returns:
@@ -54,14 +59,30 @@ class ClusteringHelper:
     for i in jsonData:
       points = []
       label = []
-      boundingPoly = []
-      for center in i['centers']:
-        label.append(center['description'])
-        points.append([center['centroid']['x'], center['centroid']['y']])
-        boundingPoly.append(center['boundingPoly'])
-      allImageData.append((points, label, boundingPoly))
+      ids = []
+      for annotation in i['annotation']:
+        # Simplified method, only take one point instead of the four, faster but less accurate
+        # label.append(annotation['description'])
+        # boundingPoly.append(annotation['boundingPoly'])
+        # points.append([annotation['boundingPoly']['vertices'][0]['x'], annotation['boundingPoly']['vertices'][0]['y']])
+        # More accurate method, use all points that define the boundingPoly, use an id to filter out points afterwards?
+        id = self.getUniqueIdFromPoint(annotation['boundingPoly']['vertices'])
+        for point in annotation['boundingPoly']['vertices']:
+          points.append([point["x"], point["y"]])
+          label.append(annotation['description'])
+          ids.append(id)
+      allImageData.append((points, label, ids))
   
     return allImageData
+
+  def getUniqueIdFromPoint(self, vertices) -> int:
+    """Computes a unique id to assign to a group of point for one annotation 
+    I will be able to prune 3 out of 4 of each point by only getting unique id in clusters"""
+    # TODO: then again what if 4 point are part of 4 different clusters??? i'm not sure this method is good :/
+    totalCoo = 0
+    for point in vertices:
+      totalCoo += point['x'] + point['y']
+    return totalCoo
 
   def getClusters(self, nbCluster: int, npPoints, clustering: ClusteringMethod):
     res = None
@@ -77,13 +98,13 @@ class ClusteringHelper:
       res = AgglomerativeClustering(n_clusters=nbCluster, linkage="ward").fit_predict(npPoints)
     return res
 
-  def groupClusters(self, clusters, points, labels, boundingPoly):
+  def groupClusters(self, clusters, points, labels, ids):
     groupedClusters = {}
     for i in range(len(clusters)):
       if clusters[i] in groupedClusters:
-        groupedClusters[int(clusters[i])].append({"point": points[i], "label": labels[i], "boundingPoly": boundingPoly[i]})
+        groupedClusters[int(clusters[i])].append({"point": points[i], "label": labels[i], "ids": ids[i]})
       else:
-        groupedClusters[int(clusters[i])] = [{"point": points[i], "label": labels[i], "boundingPoly": boundingPoly[i]}]
+        groupedClusters[int(clusters[i])] = [{"point": points[i], "label": labels[i], "ids": ids[i]}]
 
     return groupedClusters
   
@@ -92,14 +113,14 @@ class ClusteringHelper:
     Parameter: clusterNumber is used for ClusteringMethod 'Ward' and 'KMeans', MeanShift will ignore it"""
     allImageData = self.getDataFromJson(jsonData)
     allGroupedClusters = []
-    for (points, labels, boundingPoly) in allImageData:
+    for (points, labels, ids) in allImageData:
       npPoints = np.array(points)
       clusters = self.getClusters(clusterNumber, npPoints, clusteringMethod)
-      allGroupedClusters.append(self.groupClusters(clusters, points, labels, boundingPoly))
+      allGroupedClusters.append(self.groupClusters(clusters, points, labels, ids))
     return allGroupedClusters
 
   def getMockDataFromJsonFile(self, jsonRelativePath = None) -> List:
-    """ Get data from the specified jsonFile, default to assets/sample/generatedDataSample.json if empty
+    """ Get data from the specified jsonFile, default to assets/sample/sanitizedGoogleVisionJson.json if empty
     Returns: see getDataFromJson
     """
     jsonData = self.getRawJsonFromFile(jsonRelativePath)
@@ -110,9 +131,9 @@ class ClusteringHelper:
     """ Get Sample Json and output it's grouped cluster """
     allImageData = self.getMockDataFromJsonFile()
     allGroupedClusters = []
-    for (points, labels, boundingPoly) in allImageData: 
-      clusters = self.getClusters(3, np.array(points), ClusteringMethod.MEAN_SHIFT)
-      allGroupedClusters.append(self.groupClusters(clusters, points, labels, boundingPoly))
+    for (points, labels, ids) in allImageData: 
+      clusters = self.getClusters(3, np.array(points), ClusteringMethod.KMEANS)
+      allGroupedClusters.append(self.groupClusters(clusters, points, labels, ids))
     return allGroupedClusters
 
   def clusterGraph(self, allGroupedClusters=None):
@@ -140,10 +161,11 @@ def main():
       allGroupedClusters = cluster.getClusterForTests()
       print(allGroupedClusters)
 
-    elif str(sys.argv[1] == "--cluster-graph"):
+    elif str(sys.argv[1]) == "--cluster-graph":
       cluster = ClusteringHelper()
       allGroupedClusters = cluster.getClusterForTests()
       cluster.clusterGraph(allGroupedClusters)
+
   else:
     msg = """
     Direct run requires option, no option provided, options available for direct run:
