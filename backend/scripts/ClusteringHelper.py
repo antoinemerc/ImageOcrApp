@@ -48,12 +48,15 @@ class ClusteringHelper:
             }
           },...
       ]
-    Returns:
-      List [
-        points: List of array of points such as [[1,0],[3,6]] with [[x0,y0],[x1,x2]]
-        label: the attached description of the point
-        boundingPoly: List of 4 corner of google vision bounding poly
+    Returns:{
+      "1": [
+        {
+          point: [x0,y0]
+          label: the attached description of the point
+          id: 5000,
+        } 
       ]
+    }
     """
     allImageData = []
     for i in jsonData:
@@ -102,9 +105,9 @@ class ClusteringHelper:
     groupedClusters = {}
     for i in range(len(clusters)):
       if clusters[i] in groupedClusters:
-        groupedClusters[int(clusters[i])].append({"point": points[i], "label": labels[i], "ids": ids[i]})
+        groupedClusters[int(clusters[i])].append({"point": points[i], "label": labels[i], "id": ids[i]})
       else:
-        groupedClusters[int(clusters[i])] = [{"point": points[i], "label": labels[i], "ids": ids[i]}]
+        groupedClusters[int(clusters[i])] = [{"point": points[i], "label": labels[i], "id": ids[i]}]
 
     return groupedClusters
   

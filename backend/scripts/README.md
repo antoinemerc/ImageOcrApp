@@ -11,7 +11,7 @@ Direct run requires primary option, no option provided, options available for di
 Generic options (can be added after primary option and input):
 - --graph : Output a graph based on json
       
-ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph
+ex: python3 Clustering.py --json-file ../assets/sample/sanitizedGoogleVisionJson.json --graph
 
 Note that the path to a json file is built from the directory of the script, account for it when launching from another directory
 
@@ -22,4 +22,4 @@ Direct run requires option, no option provided, options available for direct run
 - --data-only : return parsed clusters as Json as output
 - --cluster-graph : display a scatter graph of sample 
 
-Direct run uses sample file at backend/assets/sample/generatedDataSample.json
+Direct run uses sample file at backend/assets/sample/sanitizedGoogleVisionJson.json
