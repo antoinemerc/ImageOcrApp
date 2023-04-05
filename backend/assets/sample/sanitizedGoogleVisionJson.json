@@ -1,51 +1,8 @@
 [
   {
-    "imageInfo": {
-      "originalname": "testEnglishImage.png",
-      "mimetype": "image/png",
-      "size": 612038
-    },
-    "annotationOverview": {
-      "locations": [],
-      "properties": [],
-      "mid": "",
-      "locale": "en",
-      "description": "O\nCLENCH\nIF YOU FEEL\nUNCOMFORTABLE\nCOMING UP WITH\nSOMETHING TO DISCUSS,\nHOW ABOUT DOING\nSOMETHING LIKE\n\"WOULD YOU\nRATHER\"?!\nDON'T WORRY,\nWE'LL HELP YOU!!",
-      "score": 0,
-      "confidence": 0,
-      "topicality": 0,
-      "boundingPoly": {
-        "vertices": [
-          {
-            "x": 14,
-            "y": 108
-          },
-          {
-            "x": 578,
-            "y": 108
-          },
-          {
-            "x": 578,
-            "y": 896
-          },
-          {
-            "x": 14,
-            "y": 896
-          }
-        ],
-        "normalizedVertices": []
-      }
-    },
-    "annotationDetails": [
+    "annotation": [
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "O",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -64,19 +21,11 @@
               "x": 17,
               "y": 231
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "CLENCH",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -95,19 +44,11 @@
               "x": 257,
               "y": 408
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "IF",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -126,19 +67,11 @@
               "x": 134,
               "y": 531
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "YOU",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -157,8 +90,7 @@
               "x": 161,
               "y": 531
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
@@ -208,14 +140,7 @@
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "COMING",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -234,19 +159,11 @@
               "x": 89,
               "y": 600
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "UP",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -265,19 +182,11 @@
               "x": 208,
               "y": 600
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "WITH",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -296,19 +205,11 @@
               "x": 246,
               "y": 600
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "SOMETHING",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -327,19 +228,11 @@
               "x": 46,
               "y": 636
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "TO",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -358,19 +251,11 @@
               "x": 211,
               "y": 637
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "DISCUSS",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -389,19 +274,11 @@
               "x": 253,
               "y": 637
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": ",",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -420,19 +297,11 @@
               "x": 362,
               "y": 638
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "HOW",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -451,19 +320,11 @@
               "x": 75,
               "y": 671
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "ABOUT",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -482,19 +343,11 @@
               "x": 148,
               "y": 671
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "DOING",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -513,19 +366,11 @@
               "x": 244,
               "y": 671
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "SOMETHING",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -544,19 +389,11 @@
               "x": 96,
               "y": 706
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "LIKE",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -575,19 +412,11 @@
               "x": 263,
               "y": 706
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "\"",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -606,19 +435,11 @@
               "x": 120,
               "y": 741
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "WOULD",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -637,19 +458,11 @@
               "x": 130,
               "y": 741
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "YOU",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -668,19 +481,11 @@
               "x": 237,
               "y": 741
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "RATHER",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -699,19 +504,11 @@
               "x": 138,
               "y": 776
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "\"",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -730,19 +527,11 @@
               "x": 239,
               "y": 775
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "?!",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -761,19 +550,11 @@
               "x": 252,
               "y": 775
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "DON'T",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -792,19 +573,11 @@
               "x": 370,
               "y": 864
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "WORRY",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -823,19 +596,11 @@
               "x": 458,
               "y": 864
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": ",",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -854,19 +619,11 @@
               "x": 555,
               "y": 864
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "WE'LL",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -885,19 +642,11 @@
               "x": 350,
               "y": 896
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "HELP",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -916,19 +665,11 @@
               "x": 432,
               "y": 896
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "YOU",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -947,19 +688,11 @@
               "x": 502,
               "y": 896
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       },
       {
-        "locations": [],
-        "properties": [],
-        "mid": "",
-        "locale": "",
         "description": "!!",
-        "score": 0,
-        "confidence": 0,
-        "topicality": 0,
         "boundingPoly": {
           "vertices": [
             {
@@ -978,8 +711,7 @@
               "x": 561,
               "y": 896
             }
-          ],
-          "normalizedVertices": []
+          ]
         }
       }
     ]

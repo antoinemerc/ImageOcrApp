@@ -1,10 +1,10 @@
-const { KMeansClustering } = require('../models/KMeansClustering');
+const { Clustering } = require('../models/Clustering');
 const router = require('express').Router();
 
 var multer = require('multer');
 var upload = multer();
 
-const kmeans = new KMeansClustering();
+const clustering = new Clustering();
 
 router.get('', async (req, res) => {
   const availableRoutes = {
@@ -13,23 +13,29 @@ router.get('', async (req, res) => {
       'Get -  /test-sample-json',
       'Get -  /test-sample-data',
       'Get -  /test-sample-centroid',
+      'Get -  /test-python-scrip'
     ]
   };
   res.send(availableRoutes)
 });
 
 router.get('/test-sample-json', async (req, res) => {
-  res.send(await kmeans.getSampleJson());
+  res.send(await clustering.getSampleJson());
 });
 
 router.get('/test-sample-data', async (req, res) => {
-  res.send(await kmeans.getDataFromSampleJson());
+  res.send(await clustering.getDataFromSampleJson());
 });
 
 router.get('/generate-sample-data-file', async (req, res) => {
-  const jsonData = await kmeans.getDataFromSampleJson();
-  kmeans.writeJsonToFile(jsonData, 'generatedData');
+  const jsonData = await clustering.getDataFromSampleJson();
+  clustering.writeJsonToFile(jsonData, 'generatedData');
   res.send(jsonData);
+});
+
+router.get('/test-python-script', async (req, res) => {
+  const result = await clustering.testPythonPipeline();
+  res.send(result);
 });
 
 module.exports = router;
