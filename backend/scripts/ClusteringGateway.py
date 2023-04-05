@@ -8,7 +8,8 @@ def main():
     allGroupedClusters = []
 
     if str(sys.argv[1]) == "--json":
-      jsonData = json.load(sys.argv[2])
+      jsonData = json.loads(sys.argv[2])
+      print(jsonData)
       allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
       json.dumps(allGroupedClusters, sys.stdout, indent=2)
 
@@ -30,7 +31,9 @@ def main():
     Generic options (can be added after primary option and input):
       --graph : Output a graph based on json
       
-      ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph   
+    ex: python3 Clustering.py --json-file ../assets/sample/generatedDataSample.json --graph
+    ex: python3 Clustering.py --json {my json here}
+    ex: python3 Clustering.py --json {my json here} --graph
 
     Note that the path to a json file is built from the directory of the script, account for it when launching from another directory
     """
