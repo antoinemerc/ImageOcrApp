@@ -59,7 +59,7 @@ class ClusteringHelper:
     }
     """
     allImageData = []
-    for i in jsonData:
+    for i in json.loads(jsonData):
       points = []
       label = []
       ids = []
@@ -110,7 +110,7 @@ class ClusteringHelper:
         groupedClusters[int(clusters[i])] = [{"point": points[i], "label": labels[i], "id": ids[i]}]
 
     return groupedClusters
-  
+
   def getGroupedClusterFromJson(self, jsonData, clusteringMethod: ClusteringMethod, clusterNumber=1):
     """ Get Grouped cluster from Json and output them
     Parameter: clusterNumber is used for ClusteringMethod 'Ward' and 'KMeans', MeanShift will ignore it"""

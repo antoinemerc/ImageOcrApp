@@ -1,18 +1,6 @@
 const fs = require('fs');
 const { spawn } = require('child_process');
 
-class AnnotationStruct {
-  naiveK;//: number;  split annotationOverview.description (extracted string separated by /n)
-  realK;//: number the human given real K
-  centers;// Centers[]List of all quadrilateral form center
-}
-
-class Centers { 
-  x;
-  y;
-  description;
-}
-
 /**
  * 
  * The plan is to feed a google vision result to this class, it will identify which point belong to which cluster
@@ -86,18 +74,17 @@ class Clustering {
   }
 
   runPythonScript(cmdArguments) { 
-    let result = '';
-    const python = spawn('python', ['../scripts/ClusteringGateway.py', ...cmdArguments]);
-    // collect data from script
-   
-
+    
     const scriptExecution = new Promise((resolve, reject) => { 
-      python.stdout.on('data', function (data) {
+      const child = spawn('python3', ['./scripts/ClusteringGateway.py', ...cmdArguments]);
+      let result = '';   
+      child.stdout.setEncoding('utf8');
+      child.stdout.on('data', (data) => {
         console.log('Pipe data from python script ...');
         result = data.toString();
         resolve(result);
       });
-      python.on('close', (code) => {
+      child.on('close', (code) => {
         resolve('No Data');
         console.log(`child process close all stdio with code ${code}`);
       });
@@ -110,24 +97,9 @@ class Clustering {
 
   async testPythonPipeline() { 
     const json = await this.getDataFromSampleJson();
-    const jsonString = JSON.stringify(json)
-    const commandLineArgument = ['--json', jsonString]
-
-    const test = JSON.parse(`[{"annotation":[{"description":"\""}]}]`);
-
-    const jsonStr= JSON.stringify(test)
-
-    console.log(jsonStr)
-
-    let test1 = []
-    test1.push(jsonStr)
-
-    console.log(test1)
-
-    //const result = await this.runPythonScript(commandLineArgument)
-    return null;
+    let commandLineArgument = ['--json', JSON.stringify(json), '--graph']
+    return await this.runPythonScript(commandLineArgument)
   }
-
 }
 
 module.exports.Clustering = Clustering; 

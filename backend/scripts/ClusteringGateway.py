@@ -8,15 +8,13 @@ def main():
     allGroupedClusters = []
 
     if str(sys.argv[1]) == "--json":
-      jsonData = json.loads(sys.argv[2])
-      print(jsonData)
-      allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
-      json.dumps(allGroupedClusters, sys.stdout, indent=2)
+      allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(sys.argv[2], ClusteringMethod.MEAN_SHIFT)
+      print(json.dump(allGroupedClusters, sys.stdout, indent=2))
 
     elif str(sys.argv[1] )== "--json-file":
       jsonData = clusteringHelper.getRawJsonFromFile(sys.argv[2])
       allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(jsonData, ClusteringMethod.MEAN_SHIFT)
-      json.dump(allGroupedClusters, sys.stdout, indent=2)
+      print(json.dump(allGroupedClusters, sys.stdout, indent=2))
 
     if "--graph" in sys.argv and sys.argv[1] in ["--json", "--json-file"]:
       clusteringHelper.clusterGraph(allGroupedClusters)
