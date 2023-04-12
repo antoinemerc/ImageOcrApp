@@ -1,9 +1,6 @@
 const { Clustering } = require('../models/Clustering');
 const router = require('express').Router();
 
-var multer = require('multer');
-var upload = multer();
-
 const clustering = new Clustering();
 
 router.get('', async (req, res) => {

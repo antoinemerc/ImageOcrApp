@@ -105,7 +105,6 @@ class Clustering {
     return await this.runPythonScript(commandLineArgument)
   }
 
-  // Clustering type supported: 'kmeans'
   async getClusteringForJson(json, clusteringType = null, centroidCount = null) { 
 
     const sanitizedJson = await this.getDataFromSampleJson();
