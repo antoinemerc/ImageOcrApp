@@ -29,16 +29,21 @@ const { spawn } = require('child_process');
  * 
  * Python script that takes this input and run it through kmeans clustering transforms this data into output Json structure
  * 
- * Wanted Output:
- * 
- *  ReturnStructure {
- *     0: [ ([x, y], 'O', [{'x': 14, 'y': 111}, {'x': 145, 'y': 108}, {'x': 148, 'y': 228}, {'x': 17, 'y': 231}])]
- *     clusters: {
- *        label: string;
- *        points: [x, y],
-*         boundingPoly: [{  "x": 14,  "y": 111},{  "x": 145,  "y": 108},{  "x": 148,  "y": 228},{  "x": 17,  "y": 231}, ...]
- *     }[]
- *  }
+ * Output:
+ *  [ 
+ *    { 
+ *      "1": [
+ *       { "point": [ 130, 722 ], "label": "WOULD", "id": 3646 },
+ *       { "point": [ 130, 741 ], "label": "WOULD", "id": 3646 },
+ *       { "point": [ 138, 756 ], "label": "RATHER", "id": 3816 },
+ *       { "point": [ 138, 776 ], "label": "RATHER", "id": 3816 } 
+ *      ],
+ *      "2": [ ... cluster 2 ... ],
+ *      ...
+ *    }, 
+ *    { ... image2 ... },
+ *    ....
+ *  ]
  */
 
 class Clustering { 

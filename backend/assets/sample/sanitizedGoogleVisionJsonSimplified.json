@@ -2,6 +2,29 @@
   {
     "annotation": [
       {
+        "description": "\"",
+        "boundingPoly": {
+          "vertices": [
+            {
+              "x": 120,
+              "y": 722
+            },
+            {
+              "x": 129,
+              "y": 722
+            },
+            {
+              "x": 129,
+              "y": 741
+            },
+            {
+              "x": 120,
+              "y": 741
+            }
+          ]
+        }
+      },
+      {
         "description": "WOULD",
         "boundingPoly": {
           "vertices": [
@@ -66,6 +89,29 @@
             {
               "x": 138,
               "y": 776
+            }
+          ]
+        }
+      },
+      {
+        "description": "\"",
+        "boundingPoly": {
+          "vertices": [
+            {
+              "x": 239,
+              "y": 756
+            },
+            {
+              "x": 248,
+              "y": 756
+            },
+            {
+              "x": 248,
+              "y": 775
+            },
+            {
+              "x": 239,
+              "y": 775
             }
           ]
         }

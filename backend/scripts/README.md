@@ -1,6 +1,6 @@
 # Clustering Helpers
 
-These python classes are used, Gateway should be the class used to run the clustering
+Gateway should be the class used to run the clustering helper, direct run is possible for debug purpose
 
 ## Clustering Gateway
 
