@@ -43,6 +43,8 @@ const { spawn } = require('child_process');
 
 class Clustering { 
 
+  supportedClusteringType = ['kmeans', 'meanShift', 'ward']
+
   getSampleJson() { 
     const path = './assets/sample/kmeans-test-google.json'
     return JSON.parse(fs.readFileSync(path))
@@ -89,15 +91,32 @@ class Clustering {
         console.log(`child process close all stdio with code ${code}`);
       });
     })
-    
-    // in close event we are sure that stream from child process is closed
-    
     return scriptExecution;
   }
 
   async testPythonPipeline() { 
     const json = await this.getDataFromSampleJson();
-    let commandLineArgument = ['--json', JSON.stringify(json), '--graph']
+    let commandLineArgument = ['json', JSON.stringify(json), '-ct', 'meanShift']
+    return await this.runPythonScript(commandLineArgument)
+  }
+
+  // Clustering type supported: 'kmeans'
+  async getClusteringForJson(json, clusteringType = null, centroidCount = null) { 
+
+    const sanitizedJson = await this.getDataFromSampleJson();
+    let commandLineArgument = ['json', JSON.stringify(sanitizedJson)];
+
+    if (clusteringType !== null && centroidCount !== undefined) {
+      if (!this.supportedClusteringType.includes(clusteringType))
+        throw new Error(`ERROR - Unknown cluster type (Accepted values: ${this.supportedClusteringType.join(', ')})`)
+      
+      commandLineArgument = [...commandLineArgument, '-ct', clusteringType];
+    }
+
+    if (centroidCount !== null && centroidCount !== undefined) { 
+      commandLineArgument = [...commandLineArgument, '-cc', centroidCount];
+    }
+    
     return await this.runPythonScript(commandLineArgument)
   }
 }

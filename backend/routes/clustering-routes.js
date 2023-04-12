@@ -38,4 +38,15 @@ router.get('/test-python-script', async (req, res) => {
   res.send(result);
 });
 
+router.post('/apply-clustering-json', async (req, res) => {
+  const { json, clusteringType, centroidCount } = req.body;
+  let result = null;
+  try {
+    result = await clustering.getClusteringForJson(json, clusteringType, centroidCount);
+  } catch (err) {
+    result = err
+  }
+  res.send(result);
+});
+
 module.exports = router;

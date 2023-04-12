@@ -9,6 +9,7 @@ class JsonInputType(enum.Enum):
     JSONPATH = 'jsonPath'
 
 def main():
+
   parser = argparse.ArgumentParser()
 
   inputTypeHelp = """
@@ -35,14 +36,6 @@ def main():
 
   clusteringHelper = ClusteringHelper()
   allGroupedClusters = []
-  
-  '''
-  ex: python3 Clustering.py json-file ../assets/sample/generatedDataSample.json --graph
-  ex: python3 Clustering.py json {my json here}
-  ex: python3 Clustering.py json {my json here} -ct "ward" -cc 2
-  ex: python3 Clustering.py json {my json here} --graph -ct "ward" -cc 4 
-  ex: python3 Clustering.py json {my json here} --graph -ct "kmeans" -cc 10
-  '''
 
   if args.inputType == JsonInputType.JSON:
     allGroupedClusters = clusteringHelper.getGroupedClusterFromJson(args.jsonContent, args.clusteringType, args.centroidCount)
@@ -56,19 +49,5 @@ def main():
   if args.graph:
     clusteringHelper.clusterGraph(allGroupedClusters)
   
-  
-
-  '''
-    # TODO: Add options to change clustering method and a cluster number input 
-    msg = """
-    Direct run requires primary option, no option provided, options available for direct run:
-      --json : run clustering on json provided as option
-      --json-file : run clustering on json file, with path provided as option , path is relative to current location
-    
-    Generic options (can be added after primary option and input):
-      --graph : Output a graph based on json
-    
-    print(msg)
-  '''
 if __name__ == '__main__':
   main()
